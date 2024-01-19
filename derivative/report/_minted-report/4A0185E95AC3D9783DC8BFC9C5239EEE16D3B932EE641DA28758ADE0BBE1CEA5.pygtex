@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:exp}\PYG{p}{,}\PYG{n}{expr}\PYG{p}{(),}\PYG{n}{literal}\PYG{p}{()\PYGZcb{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:inv}\PYG{p}{,}\PYG{n}{expr}\PYG{p}{()\PYGZcb{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ln}\PYG{p}{,}\PYG{n}{expr}\PYG{p}{()\PYGZcb{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:sqrt}\PYG{p}{,}\PYG{n}{expr}\PYG{p}{()\PYGZcb{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:sin}\PYG{p}{,}\PYG{n}{expr}\PYG{p}{()\PYGZcb{}}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cos}\PYG{p}{,}\PYG{n}{expr}\PYG{p}{()\PYGZcb{}}
+
+\end{Verbatim}

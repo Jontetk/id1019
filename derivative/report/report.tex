@@ -1,0 +1,131 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Derivative}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2023}
+
+\maketitle
+
+\section*{Introduction}
+
+This task consisted of creating a derivative solver by representing the functions as tuples. Then using different rules to solve the derivative of the function.
+
+\section*{Implementation}
+\subsection*{Derivation}
+The task was implemented by first creating four basic rules for the derivative. These were: 
+\begin{itemize}
+    \item $ \frac{d}{dx} x \equiv 1$
+    \item $\frac{d}{dx} c \equiv 0$ for any literal different from x
+    \item $\frac{d}{dx} (f+g) \equiv \frac{d}{dx} f+ \frac{d}{dx}g$ 
+    \item $\frac{d}{dx}(f{\cdot}g) \equiv \frac{d}{dx} f {\cdot} g + f{\cdot}\frac{d}{dx}g$ 
+\end{itemize}
+\noindent
+The mathematical functions that were to be used for the task were represented by tuples in elixir, these could for example look like this, 
+\begin{minted}{elixir}
+{:mul,{:num,2},{:var,:x}} 
+\end{minted}
+which would be a multiplication multiplying 2 by x. 
+The first needed expression for calculating were mul as in the example but also add which would also take two "inputs".
+The derivative for the first 4 rules were very simple. The only difference when converting them to code was that there was a requirement for to functions to return the number 0, one where any single number was used as input and one where any variable that was not the variable to be derived was used. 
+The resulting functions for the deriv was:
+\begin{minted}{elixir}
+def deriv({:num, _}, _), do: {:num,0}
+def deriv({:var, v}, v), do: {:num,1}
+def deriv({:var, _}, _), do: {:num,0}
+def deriv({:mul, e1, e2}, v), do: {:add,{:mul,deriv(e1,v),e2},{:mul,e1,deriv(e2,v)}}
+def deriv({:add, e1, e2}, v), do: {:add, deriv(e1,v),deriv(e2,v)}
+\end{minted}
+The next rules were:
+\begin{itemize}
+     
+
+    \item $\frac{d}{dx}f^n \equiv n \cdot f^{n-1} \cdot \frac{d}{dx}f$ 
+    \item $\frac{d}{dx}ln(f) \equiv \frac{1}{f} \cdot \frac{d}{dx}f$
+    \item $\frac{d}{dx} \frac{1}{f} \equiv \frac{-1}{f^2} \cdot \frac{d}{dx}f$
+    \item $\frac{d}{dx} \sqrt{f} \equiv \frac{1}{\sqrt{f}} \cdot0.5 \cdot \frac{d}{dx}f$
+    \item $\frac{d}{dx} sin(f) \equiv cos(f) \cdot \frac{d}{dx}f$
+    \item $\frac{d}{dx} cos(f) \equiv -sin(f) \cdot \frac{d}{dx}f$
+
+\end{itemize}
+\noindent
+cos had to be implemented as it got returned by sin and if somehow a derivative of a derived sin was taken then a function for deriving cos would be needed. 
+These were then implemented in the program in the same way as the previous derivation rules. Six new expressions were added, these were the:
+\begin{minted}{elixir}
+{:exp,expr(),literal()}
+{:inv,expr()}
+{:ln,expr()}
+{:sqrt,expr()}
+{:sin,expr()}
+{:cos,expr()}
+
+\end{minted}
+All of these represent a mathematical calculation and are self explanatory, the inv expression represents 1/expr. The rules were then converted into deriv functions, one per new type, these functions could then be used together to 
+do any of the rules together. 
+\begin{minted}{elixir}
+def deriv({:exp,e,{:num,n}},v), do: {:mul,{:mul,{:num,n},
+{:exp,e,{:num,n-1}}},deriv(e,v)}
+def deriv({:inv,e},v), do: {:mul,{:mul,{:num,-1},{:inv,
+{:exp,e,{:num,2}}}},deriv(e,v)}
+def deriv({:ln,e},v), do: {:mul,{:inv,e},deriv(e,v)}
+def deriv({:sqrt,e},v), do: {:mul,{:mul,{:inv,{:sqrt,e}},{:num,0.5}},deriv(e,v)}
+def deriv({:sin,e},v), do: {:mul,{:cos,e},deriv(e,v)}
+def deriv({:cos,e},v), do: {:mul,{:mul,{:sin,e},{:num,-1}},deriv(e,v)}    
+\end{minted}
+\subsection*{Simplification}
+This completed the derivative solving, now the remaining part of the task was to simplify the expressions, this was done by first creating pprint functions for each of the different expressions of calculation, including numbers and variables, examples of these are the num pprint, the mul and the inv:
+\begin{minted}{elixir}
+def pprint({:num,n}), do:  "#{n}"
+def pprint({:mul,e1,e2}), do: "#{pprint(e1)}*#{pprint(e2)}"
+def pprint({:inv,e1}), do: "1/(#{pprint(e1)})"
+\end{minted}
+This made the expressions print in a more readable form. The next step was to make functions to simplify the expressions. The implemented parts of the simpl were done by going through every expression and seeing what could be simplified. The expression with the most simplify functions was the multiplication. These included multiplication with zero and one, as well as multiplying two numbers and multiplying with the inv which would create the new expression inv\_mul which would replace the 1 in the inv with the number it was multiplied with. 
+Another interesting expression was the exponent which required different cases when the number 0 was being used either in the first position or in the second. When the 0 is in the base 0 is returned only if the exponent is larger than 0, otherwise the same statement is returned. This is because $ 0^x $ is only defined when $x >0$. The same is done when 0 is the exponent, however the statement is a bit different, as it will return 1 if the base is larger than 0 and \-1 if the base is smaller than 0, otherwise it will return the inputted expression, as $ x^0 $ only is defined when $x \neq0$.
+\begin{minted}{elixir}
+def simplify_exp({:num ,0}, {:num, n}) do
+case n do
+    x when x> 0 -> {:num, 0}
+    _ -> {:exp,{:num,0},{:num,n}}
+end
+end
+
+def simplify_exp({:num,n},{:num ,0}) do
+    case n do
+    x when x> 0 -> {:num,1}
+    x when x< 0 -> {:num,-1}
+    _ -> {:exp,{:num,n},{:num,0}}
+    end
+end
+\end{minted}
+The result of executing the 
+expression \mintinline{elixir}{{:inv,{:sin,{:mul,{:num,2},{:var,:x}}}}}:
+
+
+
+\begin{minted}{latex}
+expression: 1/(sin(2*x))
+result: -1*1/(sin(2*x)^(2))*cos(2*x)*(0*x+2*1)
+result: (-1)/(sin(2*x)^(2))*cos(2*x)*2
+\end{minted}
+\noindent
+
+There are also more simple exp expressions. The expressions added after expressions have simple simplifications which is that they calculate the number if a number is given, otherwise the statement is returned, the only different one is the inv and inv\_mul which checks if the num is zero and if it is the expression is also returned.
+\section*{Discussion}
+When deciding the simplifications I made sure that they worked correctly, and that they were simple enough to be easily readable, for example by making the inv\_mul expression. However I chose to not do too complicated simplifications, as these can easily break the code with unexpected or certain circumstances that were realized, this could make the simplification create an incorrect result.
+
+
+\end{document}

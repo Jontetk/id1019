@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+expression: 1/(sin(2*x))
+result: \PYGZhy{}1*1/(sin(2*x)\PYG{n+nb}{\PYGZca{}}(2))*cos(2*x)*(0*x+2*1)
+result: (\PYGZhy{}1)/(sin(2*x)\PYG{n+nb}{\PYGZca{}}(2))*cos(2*x)*2
+\end{Verbatim}
