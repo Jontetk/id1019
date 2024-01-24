@@ -34,4 +34,48 @@ defmodule EnvTree do
   end
 
 
+
+
+
+def remove(nil, _) do
+  :nil
+ end
+def remove({:node, key, _, nil, right}, key) do
+  right
+
+ end
+def remove({:node, key, _, left, nil}, key) do
+  left
+
+ end
+def remove({:node, key, _, left, right}, key) do
+
+{:node, new_key,new_value,_,new_right} = leftmost(right)
+{:node, new_key, new_value, left ,new_right}
+end
+def remove({:node, k, v, left, right}, key) when key < k do
+{:node, k, v, remove(left,key), right}
+
+end
+def remove({:node, k, v, left, right}, key) do
+{:node, k, v, left, remove(right,key)}
+end
+def leftmost({:node, key, value, nil, rest}) do
+  {:node,key,value,:nil,rest}
+
+
+ end
+def leftmost({:node, k, v, left, right}) do
+
+  IO.inspect(k)
+
+  {:node, new_key,new_value,new_left,new_right} = leftmost(left)
+  IO.inspect(new_key)
+  IO.inspect(new_left)
+  {:node,new_key,new_value,new_left,{:node, k, v, new_right, right}}
+
+
+
+end
+
 end
