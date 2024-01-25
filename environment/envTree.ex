@@ -67,11 +67,10 @@ def leftmost({:node, key, value, nil, rest}) do
  end
 def leftmost({:node, k, v, left, right}) do
 
-  IO.inspect(k)
+
 
   {:node, new_key,new_value,new_left,new_right} = leftmost(left)
-  IO.inspect(new_key)
-  IO.inspect(new_left)
+
   {:node,new_key,new_value,new_left,{:node, k, v, new_right, right}}
 
 
