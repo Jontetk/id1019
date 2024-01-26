@@ -49,25 +49,22 @@ def remove({:node, key, _, left, nil}, key) do
 
  end
 def remove({:node, key, _, left, right}, key) do
-
 {:node, new_key,new_value,_,new_right} = leftmost(right)
 {:node, new_key, new_value, left ,new_right}
 end
 def remove({:node, k, v, left, right}, key) when key < k do
 {:node, k, v, remove(left,key), right}
-
 end
 def remove({:node, k, v, left, right}, key) do
 {:node, k, v, left, remove(right,key)}
 end
+
+
+
 def leftmost({:node, key, value, nil, rest}) do
   {:node,key,value,:nil,rest}
-
-
  end
 def leftmost({:node, k, v, left, right}) do
-
-
 
   {:node, new_key,new_value,new_left,new_right} = leftmost(left)
 

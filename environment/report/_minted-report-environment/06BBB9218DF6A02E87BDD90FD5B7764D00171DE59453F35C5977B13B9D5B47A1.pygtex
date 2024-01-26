@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{leftmost}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{key}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{value}\PYG{p}{,}\PYG{+w}{ }\PYG{n+no}{nil}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rest}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{key}\PYG{p}{,}\PYG{n}{value}\PYG{p}{,}\PYG{l+s+ss}{:nil}\PYG{p}{,}\PYG{n}{rest}\PYG{p}{\PYGZcb{}}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{leftmost}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{left}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{right}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{new\PYGZus{}key}\PYG{p}{,}\PYG{n}{new\PYGZus{}value}\PYG{p}{,}\PYG{n}{new\PYGZus{}left}\PYG{p}{,}\PYG{n}{new\PYGZus{}right}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{leftmost}\PYG{p}{(}\PYG{n}{left}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{new\PYGZus{}key}\PYG{p}{,}\PYG{n}{new\PYGZus{}value}\PYG{p}{,}\PYG{n}{new\PYGZus{}left}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{k}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{v}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{new\PYGZus{}right}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{right}\PYG{p}{\PYGZcb{}\PYGZcb{}}
+\PYG{k}{end}
+\end{Verbatim}
