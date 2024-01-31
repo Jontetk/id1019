@@ -1,0 +1,67 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Expression}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2023}
+
+\maketitle
+
+\section*{Introduction}
+The task was to implement a function to evaluate an expression using variables stored in an environment. The task also included setting up an environment
+\section*{Implementation}
+The first function that was implemented was to setup the environment used and to make a lookup to check a variable of the environment. 
+The function for setting up the environment simply ran the inbuilt Map.new() function with the same argument it got. The function for looking up the value of a variable was made in the same way, by calling the Map.get with the arguments it got.
+The first three versions of the eval function are for the three literals num, var and q. The first two, num and var are very simple where the num returns the same number as a num and the var returns the number of the var as a num using the previously mentioned lookup function.
+The function for evaluating a q is a bit trickier as it has to simplify the q. The first thing that is done is checking if the q can be turned into an integer, this is done by using trunc on the value returned by dividing the numbers of the q. If the trunc has an equal value to the value of the division the result gets returned as a num.
+If it was not an integer the next check is to see if it can be reduced. This is done by checking the value of the greatest common divisor between the two numbers, and if it is one return the same q, if it was not return a q where both numbers have been divided by the gcd. 
+\begin{minted}{elixir}
+def eval({:q,n1,n2},_) do
+  case n1/n2 do
+    x when trunc(x) == x -> {:num,trunc(x)}
+    _ -> case Integer.gcd(n1,n2) do
+      1 -> {:q,n1,n2}
+      gcdvar -> {:q,trunc(n1/gcdvar),trunc(n2/gcdvar)}
+
+    end
+  end
+
+
+end
+  
+\end{minted}
+
+
+
+\section*{examples}
+\begin{minted}{elixir}
+  iex(47)> l
+%{y: 2, x: 8}
+iex(49)> Expressi.find_var(l,:x)
+8
+iex(48)> Expressi.eval({:q, 120,90 },l)
+{:q, 4, 3}
+iex(39)> Expressi.eval({:mul,{:var,:y},{:q,3,4}},l)
+{:q, 3, 2}
+iex(42)> Expressi.eval({:mul,{:var,:y},{:div,{:var,:x},{:num,4}}},l)
+{:num, 4}
+\end{minted}
+
+
+
+
+\end{document}
