@@ -3,6 +3,7 @@ defmodule Env do
     Map.to_list(Map.new())
   end
   def add(id,str,env) do
+
     new_env = case env do
       %{} -> env
       _-> Map.new(env)
@@ -13,14 +14,15 @@ defmodule Env do
 
 
   def lookup(id,env) do
+    IO.inspect(env)
     new_env = case env do
       %{} -> env
       _-> Map.new(env)
     end
-    result = Map.get(new_env,id)
-    case result do
-      :nil -> :nil
-    _ ->{id,result}
+      result = Map.get(new_env,id)
+      case result do
+        :nil -> :nil
+      _ ->{id,result}
 
     end
 
@@ -33,6 +35,50 @@ defmodule Env do
 
     Map.to_list(Map.drop(new_env,ids))
   end
+  def closure(keys,env) do
+    case keys do
+      [] -> :error
+      _ -> closure(keys,env,[])
+    end
+
+  end
+
+
+  def closure([hkeys|tkeys],env,cls) do
+    case lookup(hkeys,env) do
+      :nil -> :error
+      {_,result} ->
+        cls = [{hkeys,result}|cls]
+        case tkeys do
+          [] -> cls
+          _ -> closure(tkeys,env,cls)
+        end
+
+    end
+  end
+
+def args([parh|part],[hstrs|tstrs],cls) do
+  case parh do
+    [] -> :error
+    _ -> case hstrs do
+      [] -> :error
+      _ -> cls = [{parh,hstrs}|cls]
+          case part do
+            [] -> cls
+            _ -> case tstrs do
+              [] -> :error
+              _ -> args(part,tstrs,cls)
+            end
+          end
+    end
+end
+
+
+
+
+
+
+end
 
 
 end
