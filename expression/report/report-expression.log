@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  31 JAN 2024 02:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  2 FEB 2024 01:17
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -502,6 +502,9 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \openout3 = `report-expression.pyg'.
 
+ (./_minted-report-expression/130EC20CB4D65DCC2DA6BBC2F4DBB7B2FA06FAAD2C6B62494BE4CB8BCE76CF3B.pygtex)
+\openout3 = `report-expression.pyg'.
+
  (./_minted-report-expression/D9BE273D207E3C2C99632ED9D14376FBFA06FAAD2C6B62494BE4CB8BCE76CF3B.pygtex) [2] (./report-expression.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
@@ -511,15 +514,15 @@ runsystem(del report-expression.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27192 strings out of 475188
- 693930 string characters out of 5767814
+ 27199 strings out of 475188
+ 694591 string characters out of 5767814
  1924248 words of memory out of 5000000
- 48058 multiletter control sequences out of 15000+600000
+ 48062 multiletter control sequences out of 15000+600000
  562484 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,6n,103p,780b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report-expression.pdf (2 pages, 59140 bytes).
+Output written on report-expression.pdf (2 pages, 60012 bytes).
 PDF statistics:
  34 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream

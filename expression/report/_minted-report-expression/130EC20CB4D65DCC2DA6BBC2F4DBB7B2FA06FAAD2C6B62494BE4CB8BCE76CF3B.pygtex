@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{eval}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:add}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{e1}\PYG{p}{,}\PYG{n}{e2}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{add}\PYG{p}{(}\PYG{n}{e1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{e2}\PYG{p}{,}\PYG{n}{env}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}

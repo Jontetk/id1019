@@ -44,7 +44,12 @@ def eval({:q,n1,n2},_) do
 end
   
 \end{minted}
-
+The four different calculations for the eval function are the add, mul, sub and div. The eval functions that are for these tasks simply call their respective functions with the arguments that it got for the calculation. For example the eval for add:
+\begin{minted}{elixir}
+def eval({:add, e1,e2}, env) do
+  add(e1, e2,env)
+end
+\end{minted}
 
 
 \section*{examples}
