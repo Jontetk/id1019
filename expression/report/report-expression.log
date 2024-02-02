@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  2 FEB 2024 01:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  2 FEB 2024 13:18
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -508,7 +508,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
  (./_minted-report-expression/5CE90A47FCCBA44D654A137A60A8A8F0FA06FAAD2C6B62494BE4CB8BCE76CF3B.pygtex [2])
 \openout3 = `report-expression.pyg'.
 
- (./_minted-report-expression/D9BE273D207E3C2C99632ED9D14376FBFA06FAAD2C6B62494BE4CB8BCE76CF3B.pygtex) [3] (./report-expression.aux)
+ (./_minted-report-expression/191C24C0D467921D82A1656F1045FD0BFA06FAAD2C6B62494BE4CB8BCE76CF3B.pygtex [3]) [4] (./report-expression.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-11>
@@ -525,10 +525,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  99i,6n,103p,780b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report-expression.pdf (3 pages, 62395 bytes).
+Output written on report-expression.pdf (4 pages, 63427 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 40 PDF objects out of 1000 (max. 8388607)
+ 25 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

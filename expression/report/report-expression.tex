@@ -107,20 +107,24 @@ end
 \end{minted}
 
 \section*{examples}
+Some examples were created from the execution of the eval function.
+The variables used in the example are x= 8, y=2.
 \begin{minted}{elixir}
-  iex(47)> l
-%{y: 2, x: 8}
-iex(49)> Expressi.find_var(l,:x)
+find_var(l,:x)
 8
-iex(48)> Expressi.eval({:q, 120,90 },l)
+
+eval({:q, 120,90 },l)
 {:q, 4, 3}
-iex(39)> Expressi.eval({:mul,{:var,:y},{:q,3,4}},l)
+
+eval({:mul,{:var,:y},{:q,3,4}},l)
 {:q, 3, 2}
-iex(42)> Expressi.eval({:mul,{:var,:y},{:div,{:var,:x},{:num,4}}},l)
+
+eval({:mul,{:var,:y},{:div,{:var,:x},{:num,4}}},l)
 {:num, 4}
+
 \end{minted}
 
-
+The result of these examples seem to be correct as they are able to simplify the original result to a simpler result, such as 120/90 which gets simplified to 4/3.
 
 
 \end{document}

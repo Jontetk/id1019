@@ -1,6 +1,6 @@
 defmodule Prgm do
   def append() do
-  {[:y, :x],
+  {[:x, :y],
   [{:case, {:var, :x},
   [{:clause, {:atm, []}, [{:var, :y}]},
   {:clause, {:cons, {:var, :hd}, {:var, :tl}},

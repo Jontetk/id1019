@@ -14,7 +14,7 @@ defmodule Env do
 
 
   def lookup(id,env) do
-    IO.inspect(env)
+
     new_env = case env do
       %{} -> env
       _-> Map.new(env)
@@ -56,29 +56,15 @@ defmodule Env do
 
     end
   end
-
+#TODO FIX THIS SHIET
 def args([parh|part],[hstrs|tstrs],cls) do
-  case parh do
-    [] -> :error
-    _ -> case hstrs do
-      [] -> :error
-      _ -> cls = [{parh,hstrs}|cls]
-          case part do
-            [] -> cls
-            _ -> case tstrs do
-              [] -> :error
-              _ -> args(part,tstrs,cls)
-            end
-          end
+  cls = [{parh,hstrs}|cls]
+    case part do
+      [] -> cls
+      _ -> case tstrs do
+        [] -> cls
+        _ -> args(part,tstrs,cls)
+      end
     end
 end
-
-
-
-
-
-
-end
-
-
 end

@@ -172,7 +172,7 @@ def eval_args([h|t],env,strs) do
     {:ok,str} -> [str|strs]
   end
   case t do
-    [] -> {:ok,strs}
+    [] -> {:ok,Enum.reverse(strs)}
     _ -> eval_args(t,env,strs)
   end
 end
