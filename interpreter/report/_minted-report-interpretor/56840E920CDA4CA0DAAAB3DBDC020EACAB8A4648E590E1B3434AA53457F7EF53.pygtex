@@ -1,0 +1,34 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{seq}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{l+s+ss}{:a}\PYG{p}{\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:y}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:b}\PYG{p}{\PYGZcb{}\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:ignore}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:z}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:y}\PYG{p}{\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:z}\PYG{p}{\PYGZcb{}]}
+
+\PYG{l+s+ss}{result}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:b}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{seq}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:a}\PYG{p}{\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:case}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}
+\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:clause}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:b}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:ops}\PYG{p}{\PYGZcb{}]\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:clause}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:a}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:yes}\PYG{p}{\PYGZcb{}]\PYGZcb{}}
+\PYG{p}{]\PYGZcb{}}
+\PYG{p}{]}
+
+\PYG{l+s+ss}{result}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:yes}\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{seq}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:a}\PYG{p}{\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:f}\PYG{p}{\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:lambda}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[}\PYG{l+s+ss}{:y}\PYG{p}{],}\PYG{+w}{ }\PYG{p}{[}\PYG{l+s+ss}{:x}\PYG{p}{],}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:y}\PYG{p}{\PYGZcb{}\PYGZcb{}]\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:apply}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:f}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:b}\PYG{p}{\PYGZcb{}]\PYGZcb{}}
+\PYG{p}{]}
+
+\PYG{l+s+ss}{result}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:a}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:b}\PYG{p}{\PYGZcb{}\PYGZcb{}}
+
+\PYG{n}{seq}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:a}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:b}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[]\PYGZcb{}\PYGZcb{}\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:match}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:y}\PYG{p}{\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:c}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:d}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:atm}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[]\PYGZcb{}\PYGZcb{}\PYGZcb{}\PYGZcb{},}
+\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:apply}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:fun}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:append}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:x}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:var}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:y}\PYG{p}{\PYGZcb{}]\PYGZcb{}}
+\PYG{p}{]}
+
+\PYG{l+s+ss}{result}\PYG{p}{:}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:a}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:b}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:d}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[]\PYGZcb{}\PYGZcb{}\PYGZcb{}\PYGZcb{}\PYGZcb{}}
+\end{Verbatim}

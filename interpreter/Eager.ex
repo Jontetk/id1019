@@ -30,6 +30,7 @@ def eval_expr({:case, expr, cls}, env) do
       eval_cls(cls, str, env)
   end
 end
+
 def eval_expr({:lambda, par, free, seq},env) do
   case Env.closure(free,env) do
     :error ->
@@ -65,12 +66,12 @@ def eval_cls([], _, _) do
   :error
 end
 def eval_cls([{:clause, ptr, seq} | cls], str, env) do
-  env = eval_scope(ptr,env)
-  case eval_match(ptr,str,env) do
+  new_env = eval_scope(ptr,env)
+  case eval_match(ptr,str,new_env) do
     :fail ->
       eval_cls(cls, str, env)
-    {:ok, env} ->
-      eval_seq(seq, env)
+    {:ok, new_env} ->
+      eval_seq(seq, new_env)
   end
 end
 

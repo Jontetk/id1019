@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{([}\PYG{n}{parh}\PYG{o}{|}\PYG{n}{part}\PYG{p}{],[}\PYG{n}{hstrs}\PYG{o}{|}\PYG{n}{tstrs}\PYG{p}{],}\PYG{n}{cls}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{cls}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{n}{parh}\PYG{p}{,}\PYG{n}{hstrs}\PYG{p}{\PYGZcb{}}\PYG{o}{|}\PYG{n}{cls}\PYG{p}{]}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{part}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{      }\PYG{p}{[]}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{cls}
+\PYG{+w}{      }\PYG{n+nb+bp}{\PYGZus{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{tstrs}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{        }\PYG{p}{[]}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{cls}
+\PYG{+w}{        }\PYG{n+nb+bp}{\PYGZus{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{(}\PYG{n}{part}\PYG{p}{,}\PYG{n}{tstrs}\PYG{p}{,}\PYG{n}{cls}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{end}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

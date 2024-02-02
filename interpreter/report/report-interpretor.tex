@@ -1,0 +1,204 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Interpretator}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2023}
+
+\maketitle
+
+\section*{Introduction}
+The task involved creating a interpretator for a language where the input is represented by tuples.
+
+\section*{Implementation}
+The first thing that had to be done was to create an environment. This environment called Env first contained four simple functions, to add, lookup, remove and create a new environment. Two more functions had to be added to the environment to make more advanced functions work. 
+These are the closure and the args functions. The closure function combines free variables with values in a new environment. This is done 
+by first calling closure with an extra empty list to represent a new environment. The value for the unbound variables are then looked up in the environment, if found a result the variable and the result is added to the closure, this is then repeated until there are no more keys to be evaluated. 
+\begin{minted}{elixir}
+def closure(keys,env) do
+  closure(keys,env,[])
+end
+def closure([hkeys|tkeys],env,cls) do
+  case lookup(hkeys,env) do
+    :nil -> :error
+    {_,result} ->
+      cls = [{hkeys,result}|cls]
+      case tkeys do
+        [] -> cls
+        _ -> closure(tkeys,env,cls)
+      end
+  end
+end
+\end{minted}
+The second extra function in the Env is the args function, this combines parameters with their respective data structure and adds the binding to a closure environment. This is done by first adding the binding, then checking if there are any more bindings to be done, if there are the function is called again, if there are not the closure is returned.
+\begin{minted}{elixir}
+def args([parh|part],[hstrs|tstrs],cls) do
+  cls = [{parh,hstrs}|cls]
+    case part do
+      [] -> cls
+      _ -> case tstrs do
+        [] -> cls
+        _ -> args(part,tstrs,cls)
+      end
+    end
+end
+\end{minted}
+The Eager module made for actually evaluating the inputted functionality is split into multiple functions. The first function is the eval\_expr, this function is made to take an expression and evaluate it. The function returns either an :errror or a tuple containg :ok and the result. Some expressions are simpler to evaluate than others. The :atm expression simply returns the value that is in the expression, and the :var returns the result of the lookup of the var in the environment.
+The rest of the eval\_expr functions are more complicated, the :cons has to eval the expression of both the head and tail of the cons. This is done by first running eval\_expr on the head and then the tail, if they both returned ok al tuple containing both of the returns are returned.
+The eval\_expr for case statements first eval the expression part of the statement and then calls eval\_cls with the return.
+\begin{minted}{elixir}
+def eval_expr({:case, expr, cls}, env) do
+  case eval_expr(expr, env) do
+    :error ->
+      :error
+    {:ok,str} ->
+      eval_cls(cls, str, env)
+  end
+end  
+\end{minted}
+The lamba version is very simple and just calls Env.closure and then returns the result.
+The final eval\_expr is the one for the apply, it first calls eval\_expr on the expression in the apply it then checks that the function returened a closure, which would mean that the expression was indeed some kind of function. It then calls the eval\_args function, which returns structures from the inputted list of args, this is done by first calling itself with an empty list, which will represent the structures. It then evaluates the expression of the head of the args list if that errored :error is returened if it did not str is added to the strs list, then if there are still args in the tail it calls itself with the tail as the args list, finally the structures are returened.  Finally these structures and parameters are added to the closure using the Env.args function. finally the sequense in the function is evaluated using eval\_seq.
+\begin{minted}{elixir}
+def eval_expr({:apply, expr, args}, env) do
+  case eval_expr(expr,env) do
+    :error ->
+      :error
+    {:ok, {:closure, par, seq, closure}} ->
+      case eval_args(args, env) do
+        :error ->
+          :error
+        {:ok, strs} ->
+          env = Env.args(par, strs, closure)
+          eval_seq(seq, env)
+      end
+  end
+end
+\end{minted}
+
+The next function is the eval\_cls which takes in a list of clauses a structure and an environment. It then tries to match the input of the clause to the structure using the eval\_match fucntion. eval\_scope is called before the eval\_match to remove the variable that is trying to be matched to as it will be overwritten. 
+Then if the match succeded the sequence is checked using eval\_seq. If the function is called with the clause list empty :error will be returned. 
+\begin{minted}{elixir}
+def eval_cls([], _, _) do
+  :error
+end
+def eval_cls([{:clause, ptr, seq} | cls], str, env) do
+  new_env = eval_scope(ptr,env)
+  case eval_match(ptr,str,new_env) do
+    :fail ->
+      eval_cls(cls, str, env)
+    {:ok, new_env} ->
+      eval_seq(seq, new_env)
+  end
+end
+\end{minted}
+The next function is the eval\_match. The first two versions are for :ignore and :atm which is being matched to the same id and the :ignore these two only return the same env that was in the arguments. 
+The next version is for the var. This version has some logic in it as it checks for the variable in the environment using Env.lookup. Then if the lookup returened nil which means the variable is not bound to anything a tuple with :ok and an environment consisting of the current environment and the new variable added using Env.add will be retunred. If the same structure that was trying to be mathced is returened the same env as inputted is returened. 
+Finally if it is a different structure, :fail will be returned.
+\begin{minted}{elixir}
+def eval_match({:var, id}, str, env) do
+
+  case Env.lookup(id,env) do
+  nil ->
+    {:ok, Env.add(id,str,env)}
+  {_, ^str} ->
+    {:ok, env}
+  {_, _} ->
+    :fail
+  end
+end
+
+\end{minted}
+The next implementation of the match function is for cons where the head is first matched using the match function and if it returened a new environment the tail is also matched. If the head fail it will return :fail and as the result of the match of the tail is returened it will also return :fail if it fails. 
+\begin{minted}{elixir}
+def eval_match({:cons, hp, tp}, {hstr,tstr}, env) do
+  case eval_match(hp, hstr, env) do
+    :fail ->
+      :fail
+    {_,new_env} ->
+      eval_match(tp, tstr, new_env)
+  end
+end
+  
+\end{minted}
+The final version is for every other case which will just return a :fail.
+The eval\_scope function is the next one, it simply calls Env.remove with the keys gotten from the extract\_vars function. The extract\_vars function takes in an expression and then calls itself with an expression and an empty list where extracted vars will be placed. The atm and ignore expressions simply return the same vars list, the var adds to the vars list, the cons is a bit more complicated as it first calls extract\_vars on the head then uses the returned vars list as vars and calls extract\_vars on the tail. 
+The final function in the Eager module is the eval\_seq which evaluates the sequence. 
+This is done by getting the head of the whole expression and trying to match it to a :match tuple, if it succeds the expression in the value part of the match tuple will be evaluated if it does not error the variable trying to be matched are run through eval\_scope then the var and the str together with the env returned from eval\_scope gets put into arguments for eval\_match if the match succeds the tail of the sequence is evaluated using eval\_seq. If there is only one expression left the expression is simply evaluated.
+\begin{minted}{elixir}
+def eval_seq([exp], env) do
+  eval_expr(exp, env)
+end
+
+def eval_seq([{:match, var, val} | tail], env) do
+
+  case eval_expr(val, env) do
+
+    :error ->
+      :error
+    {:ok,str} ->
+
+      env = eval_scope(var, env)
+      case eval_match(var, str, env) do
+        :fail ->
+          :error
+        {:ok, env} ->
+          eval_seq(tail, env)
+      end
+  end
+end
+\end{minted}
+\subsection*{Examples}
+Examples from evaluating different sequences:
+
+\begin{minted}{elixir}
+seq = [{:match, {:var, :x}, {:atm,:a}},
+{:match, {:var, :y}, {:cons, {:var, :x}, {:atm, :b}}},
+{:match, {:cons, :ignore, {:var, :z}}, {:var, :y}},
+{:var, :z}]
+
+result: {:ok, :b}
+
+seq = [{:match, {:var, :x}, {:atm, :a}},
+{:case, {:var, :x},
+[{:clause, {:atm, :b}, [{:atm, :ops}]},
+{:clause, {:atm, :a}, [{:atm, :yes}]}
+]}
+]
+
+result: {:ok, :yes}
+
+seq = [{:match, {:var, :x}, {:atm, :a}},
+{:match, {:var, :f},
+{:lambda, [:y], [:x], [{:cons, {:var, :x}, {:var, :y}}]}},
+{:apply, {:var, :f}, [{:atm, :b}]}
+]
+
+result: {:ok, {:a, :b}}
+
+seq = [{:match, {:var, :x},
+{:cons, {:atm, :a}, {:cons, {:atm, :b}, {:atm, []}}}},
+{:match, {:var, :y},
+{:cons, {:atm, :c}, {:cons, {:atm, :d}, {:atm, []}}}},
+{:apply, {:fun, :append}, [{:var, :x}, {:var, :y}]}
+]
+
+result: {:ok, {:a, {:b, {:c, {:d, []}}}}}
+\end{minted}
+
+
+
+\end{document}

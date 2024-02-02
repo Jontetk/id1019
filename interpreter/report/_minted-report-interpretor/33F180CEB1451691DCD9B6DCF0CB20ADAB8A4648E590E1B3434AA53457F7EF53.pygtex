@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}expr}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:apply}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{expr}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{args}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}expr}\PYG{p}{(}\PYG{n}{expr}\PYG{p}{,}\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{l+s+ss}{:error}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{l+s+ss}{:error}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:closure}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{par}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{seq}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{closure}\PYG{p}{\PYGZcb{}\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}args}\PYG{p}{(}\PYG{n}{args}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{        }\PYG{l+s+ss}{:error}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{          }\PYG{l+s+ss}{:error}
+\PYG{+w}{        }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{strs}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{          }\PYG{n}{env}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{Env}\PYG{o}{.}\PYG{n}{args}\PYG{p}{(}\PYG{n}{par}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{strs}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{closure}\PYG{p}{)}
+\PYG{+w}{          }\PYG{n}{eval\PYGZus{}seq}\PYG{p}{(}\PYG{n}{seq}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

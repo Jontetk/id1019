@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}match}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:cons}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{hp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tp}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{hstr}\PYG{p}{,}\PYG{n}{tstr}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}match}\PYG{p}{(}\PYG{n}{hp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{hstr}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{l+s+ss}{:fail}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{l+s+ss}{:fail}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n}{new\PYGZus{}env}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{n}{eval\PYGZus{}match}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{tstr}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{new\PYGZus{}env}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+
+\end{Verbatim}

@@ -36,10 +36,8 @@ defmodule Env do
     Map.to_list(Map.drop(new_env,ids))
   end
   def closure(keys,env) do
-    case keys do
-      [] -> :error
-      _ -> closure(keys,env,[])
-    end
+    closure(keys,env,[])
+
 
   end
 
@@ -56,7 +54,7 @@ defmodule Env do
 
     end
   end
-#TODO FIX THIS SHIET
+
 def args([parh|part],[hstrs|tstrs],cls) do
   cls = [{parh,hstrs}|cls]
     case part do

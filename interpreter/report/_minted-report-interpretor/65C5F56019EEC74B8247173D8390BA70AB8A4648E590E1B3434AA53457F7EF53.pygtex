@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}expr}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:case}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{expr}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{cls}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{eval\PYGZus{}expr}\PYG{p}{(}\PYG{n}{expr}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{l+s+ss}{:error}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{l+s+ss}{:error}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:ok}\PYG{p}{,}\PYG{n}{str}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{n}{eval\PYGZus{}cls}\PYG{p}{(}\PYG{n}{cls}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{str}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{env}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}
