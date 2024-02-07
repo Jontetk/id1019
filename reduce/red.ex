@@ -29,7 +29,6 @@ defmodule Reduce do
   end
   def inc([h|t],val,new_list) do
     inc(t,val,new_list++[(h+val)])
-
   end
 
   def inc([],val,new_list) do

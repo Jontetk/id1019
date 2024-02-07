@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{(}\PYG{n}{list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{length}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{([}\PYG{n+nb+bp}{\PYGZus{}}\PYG{o}{|}\PYG{n}{t}\PYG{p}{],}\PYG{n}{len}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{length}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{len}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{length}\PYG{p}{([],}\PYG{n}{len}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{len}
+\PYG{k}{end}
+\end{Verbatim}
