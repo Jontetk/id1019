@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{func}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{map}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{n}{func}\PYG{p}{,[])}
+\PYG{k}{end}
+
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{([}\PYG{n}{h}\PYG{o}{|}\PYG{n}{t}\PYG{p}{],}\PYG{n}{func}\PYG{p}{,}\PYG{n}{new\PYGZus{}list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{map}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{func}\PYG{p}{,}\PYG{n}{new\PYGZus{}list}\PYG{o}{++}\PYG{p}{[}\PYG{n}{func}\PYG{o}{.}\PYG{p}{(}\PYG{n}{h}\PYG{p}{)])}
+\PYG{k}{end}
+
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{map}\PYG{p}{([],}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n}{new\PYGZus{}list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{new\PYGZus{}list}
+\PYG{k}{end}
+\end{Verbatim}

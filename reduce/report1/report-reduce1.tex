@@ -14,7 +14,7 @@
 \begin{document}
 
 \title{
-    \textbf{Recursive functions}
+    \textbf{Reduce Part 1}
 }
 \author{Jonathan Karlsson}
 \date{Spring Term 2024}
@@ -26,7 +26,7 @@
 The task was to create recursive functions.
 \section*{Implementation}
 
-The first funciton that was implemented was length It was implemented by simply calling the same function recursivly, and then increasing an argument by one each time while also removing an element, finally when the list is empty the value is returned.
+The first function that was implemented was length It was implemented by simply calling the same function recursivly, and then increasing an argument by one each time while also removing an element, finally when the list is empty the value is returned.
 \begin{minted}{elixir}
 def length(list) do
   length(list,0)
@@ -66,6 +66,43 @@ def sum([],result) do
   result
 end
 \end{minted}
+The dec was done in the same way as the sum but subtracting the value instead of adding it. 
+The same is true for the mul function which multiplied the values. 
+The odd is similar to the even but it checks for a 1 instead of a 0. The rem is the same as the previous per item calculation functions such as the 
+mul and add but it uses the rem function with the value instead of doing a calculation. 
+The prod function is very similar to the sum but it sets the initial value to nil, then checks if the value is nil or not if it is the element is used if it was not the element multiplied with the current result value is used as the next result. 
+\begin{minted}{elixir}
+def prod(list) do
+  prod(list,nil)
+end
+def prod([h|t],result)do
+  case result do
+    nil -> prod(t,h)
+    _ -> prod(t,result*h)
+  end
+end
+def prod([],result) do
+  result
+end
+\end{minted}
+The final function is the div which checks if the remainder is 0 when using the rem function on the current element and the given value, if it is 0 the current element is added to the new list. 
 
+\begin{minted}{elixir}
+def div(list,val) do
+  div(list,val,[])
+end
+def div([h|t],val,new_list) do
+  case rem(h,val) do
+    0 -> div(t,val,new_list++[h])
+    _ -> div(t,val,new_list)
+  end
+
+  end
+
+def div([],val,new_list) do
+  new_list
+end
+\end{minted}
+These functions are all very similar and can be much simpler by using other functions which will be done in part 2. 
 
 \end{document}

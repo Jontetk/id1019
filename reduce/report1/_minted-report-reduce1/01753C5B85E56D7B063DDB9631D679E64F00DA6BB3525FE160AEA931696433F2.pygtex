@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{prod}\PYG{p}{(}\PYG{n}{list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{prod}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{n+no}{nil}\PYG{p}{)}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{prod}\PYG{p}{([}\PYG{n}{h}\PYG{o}{|}\PYG{n}{t}\PYG{p}{],}\PYG{n}{result}\PYG{p}{)}\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{result}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n+no}{nil}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{prod}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{h}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n+nb+bp}{\PYGZus{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{prod}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{result}\PYG{o}{*}\PYG{n}{h}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{prod}\PYG{p}{([],}\PYG{n}{result}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{result}
+\PYG{k}{end}
+\end{Verbatim}

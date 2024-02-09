@@ -1,10 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1707336860 "f:/SKOLADOKUMENT/id1019/reduce/report1/report-recursive.tex" "report-recursive.pdf" "report-recursive" 1707336861 0
-  "_minted-report-recursive/29223FF206BFFEE41EEE4AD64103B80F4814420072C09D55301C94D04A3F38EB.pygtex" 1707335233 696 ba454e49ce1654061fc689db1da30186 ""
-  "_minted-report-recursive/67063033D6C668FF015CC709B6721C744814420072C09D55301C94D04A3F38EB.pygtex" 1707335326 404 a91ea7024fcde4b7401d981b4d52bf5f ""
-  "_minted-report-recursive/D7245BD814B6439A31B0F5C1A5F86ECA4814420072C09D55301C94D04A3F38EB.pygtex" 1707335233 656 d1a7a8144c30b76eea03cb3d0fcb1262 ""
-  "_minted-report-recursive/F96B2AC887DB268B0896F5D446800C134814420072C09D55301C94D04A3F38EB.pygtex" 1707336860 623 332239fe4b035b2f9225f12bf5970216 ""
-  "_minted-report-recursive/default.pygstyle" 1707335233 6530 74aba51736a5bc6590f8f7dd413c6f27 ""
+["pdflatex"] 1707480081 "f:/SKOLADOKUMENT/id1019/reduce/report2/report-reduce2.tex" "report-reduce2.pdf" "report-reduce2" 1707480082 0
+  "_minted-report-reduce2/9EBC18A7D2BB3A4031F396B1ADA578853DAA3F1E88AA1826D96496F892953949.pygtex" 1707478947 837 eaed96de3b0ffb73d44f8544ae928c3c ""
+  "_minted-report-reduce2/default.pygstyle" 1707478939 6530 74aba51736a5bc6590f8f7dd413c6f27 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1693252376 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1693250389 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1693250389 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -175,11 +172,11 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1693259328 4703417 774bacf0b829d2915046f57da58dbddc ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1693259685 8172988 01ef39466c61823c9869c246c4e8e439 ""
   "c:/texlive/2023/texmf.cnf" 1693259237 713 e69b156964470283e0530f5060668171 ""
-  "f:/SKOLADOKUMENT/id1019/reduce/report1/report-recursive.tex" 1707336858 2054 8c22a12eb1a517ef9accb1c4cf7519ef ""
-  "report-recursive.aux" 1707336861 380 b4b228cf5cfad06faa713c4522c0e5ba "pdflatex"
-  "report-recursive.tex" 1707336858 2054 8c22a12eb1a517ef9accb1c4cf7519ef ""
+  "f:/SKOLADOKUMENT/id1019/reduce/report2/report-reduce2.tex" 1707480081 1268 a1bc0c5d91ae56a1f9b6507ac401f6c9 ""
+  "report-reduce2.aux" 1707480082 155 ca36f67460b57163bf1433314961a0e6 "pdflatex"
+  "report-reduce2.tex" 1707480081 1268 a1bc0c5d91ae56a1f9b6507ac401f6c9 ""
   (generated)
-  "report-recursive.aux"
-  "report-recursive.log"
-  "report-recursive.pdf"
+  "report-reduce2.aux"
+  "report-reduce2.log"
+  "report-reduce2.pdf"
   (rewritten before read)

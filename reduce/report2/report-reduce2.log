@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  7 FEB 2024 21:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  9 FEB 2024 13:01
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**f:/SKOLADOKUMENT/id1019/reduce/report1/report-recursive.tex
-(f:/SKOLADOKUMENT/id1019/reduce/report1/report-recursive.tex
+**f:/SKOLADOKUMENT/id1019/reduce/report2/report-reduce2.tex
+(f:/SKOLADOKUMENT/id1019/reduce/report2/report-reduce2.tex
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-11>
 (c:/texlive/2023/texmf-dist/tex/latex/base/article.cls
@@ -157,7 +157,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@every@listing=\toks23
 \c@listing=\count290
 )
-runsystem(if not exist _minted-report-recursive mkdir _minted-report-recursive)...executed.
+runsystem(if not exist _minted-report-reduce2 mkdir _minted-report-reduce2)...executed.
 
  (c:/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
@@ -437,16 +437,16 @@ File: tikzlibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
  (c:/texlive/2023/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
 File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )))
-runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > report-recursive.aex <nul: /p x=^%~$PATH:i>> report-recursive.aex)...executed.
+runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > report-reduce2.aex <nul: /p x=^%~$PATH:i>> report-reduce2.aex)...executed.
 
-runsystem(del report-recursive.aex)...executed.
+runsystem(del report-reduce2.aex)...executed.
 
  (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count323
 \l__pdf_internal_box=\box72
-) (./report-recursive.aux)
-\openout1 = `report-recursive.aux'.
+) (./report-reduce2.aux)
+\openout1 = `report-reduce2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
@@ -492,43 +492,34 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 22.
-\openout3 = `report-recursive.pyg'.
+\openout3 = `report-reduce2.pyg'.
 
-(./_minted-report-recursive/default.pygstyle) (./_minted-report-recursive/D7245BD814B6439A31B0F5C1A5F86ECA4814420072C09D55301C94D04A3F38EB.pygtex
+(./_minted-report-reduce2/default.pygstyle) (./_minted-report-reduce2/9EBC18A7D2BB3A4031F396B1ADA578853DAA3F1E88AA1826D96496F892953949.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2.
-)
-\openout3 = `report-recursive.pyg'.
+) [1
 
- (./_minted-report-recursive/29223FF206BFFEE41EEE4AD64103B80F4814420072C09D55301C94D04A3F38EB.pygtex)
-\openout3 = `report-recursive.pyg'.
-
- (./_minted-report-recursive/67063033D6C668FF015CC709B6721C744814420072C09D55301C94D04A3F38EB.pygtex [1
-
-{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
-\openout3 = `report-recursive.pyg'.
-
- (./_minted-report-recursive/F96B2AC887DB268B0896F5D446800C134814420072C09D55301C94D04A3F38EB.pygtex) [2] (./report-recursive.aux)
+{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./report-reduce2.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-11>
  ***********
-runsystem(del report-recursive.pyg)...executed.
+runsystem(del report-reduce2.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27207 strings out of 475188
- 695215 string characters out of 5767814
- 1922248 words of memory out of 5000000
- 48067 multiletter control sequences out of 15000+600000
+ 27184 strings out of 475188
+ 693158 string characters out of 5767814
+ 1921248 words of memory out of 5000000
+ 48053 multiletter control sequences out of 15000+600000
  562484 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,6n,103p,776b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,6n,103p,774b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report-recursive.pdf (2 pages, 56699 bytes).
+Output written on report-reduce2.pdf (1 page, 54290 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
- 21 compressed objects within 1 object stream
+ 31 PDF objects out of 1000 (max. 8388607)
+ 19 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

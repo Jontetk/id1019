@@ -1,0 +1,48 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Reduce Part 2}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+This task is a continuation of the previous part where the three functions map, reduce and filter should be implemented.
+The functions from the previous part should also be rewritten using these functions. A new function for taking a list of integers and returning a sum of the square of all values less than a specified value should also be created. 
+
+\section*{Implementation}
+
+The first function that was created was the map function, this function simply copies all elements of the inputted list to a new list, but first runs each element through a function given as an argument.
+\begin{minted}{elixir}
+def map(list, func) do
+  map(list,func,[])
+end
+
+def map([h|t],func,new_list) do
+  map(t,func,new_list++[func.(h)])
+end
+
+def map([],_,new_list) do
+  new_list
+end
+\end{minted}
+The next function was the reduce. It was implemented in two different ways. reducel and reducer. 
+
+
+
+\end{document}
