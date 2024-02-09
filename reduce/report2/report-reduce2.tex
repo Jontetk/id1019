@@ -41,7 +41,130 @@ def map([],_,new_list) do
   new_list
 end
 \end{minted}
-The next function was the reduce. It was implemented in two different ways. reducel and reducer. 
+The next function was the reduce. It was implemented in two different ways. reducel and reducer. The reducel is tail recursive as it evaluates the reduce using the tail and the function as the value, while the reducer evaluates the func and then having the next recursion of the reduce inside the function call. This seems less efficient as the reducer has to go all the way until the list is empty and then start calculating the function this means that the function is not getting to finish its calculation for a long time. 
+The reducel however lets the function calculate directly and then calls the reduce on the rest of the list. 
+
+\begin{minted}{elixir}
+def reducel([h|t],init_val,func) do
+  reducel(t,func.(h,init_val),func)
+
+end
+def reducel([],init_val,_) do
+  init_val
+end
+def reducer([h|t],init_val,func) do
+  func.(h,reducer(t,init_val,func))
+
+end
+def reducer([],init_val,_) do
+  init_val
+end
+\end{minted}
+
+The filter has three different ways of implementation. The filterl, firlterr and filterlalt. The difference between filterl and filterr is similar to the reduce where for the filterl, filterl is called recursivly and each time the func is used to check for the condition of the current element. Then if it was true the element is appended to the list. Filterr however also calls the function first, but then uses the | operator to add the h infront of the next call of filterr, this means that filterr has to go until the end and then build the list backwards from the end, while filterl appends. 
+
+\begin{minted}{elixir}
+def filterl(list,func) do
+  filterl(list,func,[])
+end
+def filterl([h|t],func,new_list) do
+  case func.(h) do
+    true -> filterl(t,func,new_list++[h])
+    false -> filterl(t,func,new_list)
+  end
+end
+def filterl([],func,new_list) do
+  new_list
+end
+
+def filterr([h|t],func) do
+case func.(h) do
+  true -> [h|filterr(t,func)]
+  false -> filterr(t,func)
+end
+end
+def filterr([],func) do
+[]
+end
+\end{minted}
+As filterl has to use the append function which is slow it is unsure if filterr or filterl is more efficient. However filterl could be made more efficient by using the | to add the element to the new list, this makes the operation faster but makes the returned list the reverse of the inputted list, but if the order of the list is 
+not important for the implementation then filterlalt should be very efficient. 
+\begin{minted}{elixir}
+def filterlalt(list,func) do
+  filterlalt(list,func,[])
+end
+def filterlalt([h|t],func,new_list) do
+  case func.(h) do
+    true -> filterlalt(t,func,[h|new_list])
+    false -> filterlalt(t,func,new_list)
+  end
+end
+def filterlalt([],func,new_list) do
+  new_list
+end
+\end{minted}
+The functions from the previous part then had to be implemented. 
+These were much simpler when using the map, filter and reduce functions. 
+The first function, the length was implemented by using the reducel with a function that 
+increases a count variable which is the init\_val in the reduce when the function is called. 
+\begin{minted}{elixir}
+def length(list) do
+  reducel(list,0,fn _, count -> count+1 end)
+end
+\end{minted}
+The even is written using the filterl function where the function used simply checked if the rem of the item divided by 2 is 0 then true is returned otherwise false. 
+\begin{minted}{elixir}
+def even(list) do
+  filterl(list,fn item -> case rem(item,2) do
+    0-> true
+    _ -> false end end)
+end
+\end{minted}
+
+The inc function uses the map function where the function used simply increase the current element with a selected value.
+\begin{minted}{elixir}
+def inc(list,val) do
+  map(list,fn item ->item+val end)
+end
+\end{minted}
+
+The sum function works similar to the length but adds each element to a total. 
+\begin{minted}{elixir}
+def sum(list) do
+  reducel(list,0,fn item,total ->total+item end)
+end
+\end{minted}
+
+The dec is the same as the inc function but subtracts the value from the item instead of adding it. 
+The mul function is also the same but multiplies the value. The odd function is the same as the even function but 
+returns true if the remainder is 1 instead of 0. The rem works in a similar way to mul,dec and inc by using map with the function used returning the remainder of the element divided by a value. 
+The prod function is a bit different as it uses a nil as the initial value for the reducel function then in the function used as an argument it checks if the total is a nil, if it is it returns the item otherwise the item times the total. 
+\begin{minted}{elixir}
+def prod(list) do
+  reducel(list,nil,fn item,total -> case total do
+    nil -> item
+    _ -> item*total
+  end end)
+end
+\end{minted}
+The div function uses the filterl where the function used as an argument checks if the remainder with the element divided by the value is 0 and if it is true is returned, 
+otherwise false is returned.
+\begin{minted}{elixir}
+def div(list,val) do
+  filterl(list,fn item -> case rem(item,val) do
+    0-> true
+    _ -> false end end)
+end
+\end{minted}
+The function that takes the sum of the square of all values less than n in the list is made using pipe operators, where first a filter function is called to filter all items that are less than n, then its output is piped into a map function that squares every item and finally, 
+that output is piped into a reduce that sums all the items.
+\begin{minted}{elixir}
+def sum_square_less_than_n(list,n) do
+  filterl(list,fn item -> item <n end)|> 
+  map(fn item -> item**2 end) |> 
+  reducel(0,fn item,total ->total+item end)
+end
+\end{minted}
 
 
 

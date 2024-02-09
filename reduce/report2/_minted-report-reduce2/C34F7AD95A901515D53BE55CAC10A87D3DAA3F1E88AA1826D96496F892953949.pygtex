@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{reducel}\PYG{p}{([}\PYG{n}{h}\PYG{o}{|}\PYG{n}{t}\PYG{p}{],}\PYG{n}{init\PYGZus{}val}\PYG{p}{,}\PYG{n}{func}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{reducel}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{func}\PYG{o}{.}\PYG{p}{(}\PYG{n}{h}\PYG{p}{,}\PYG{n}{init\PYGZus{}val}\PYG{p}{),}\PYG{n}{func}\PYG{p}{)}
+
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{reducel}\PYG{p}{([],}\PYG{n}{init\PYGZus{}val}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{init\PYGZus{}val}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{reducer}\PYG{p}{([}\PYG{n}{h}\PYG{o}{|}\PYG{n}{t}\PYG{p}{],}\PYG{n}{init\PYGZus{}val}\PYG{p}{,}\PYG{n}{func}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{func}\PYG{o}{.}\PYG{p}{(}\PYG{n}{h}\PYG{p}{,}\PYG{n}{reducer}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{init\PYGZus{}val}\PYG{p}{,}\PYG{n}{func}\PYG{p}{))}
+
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{reducer}\PYG{p}{([],}\PYG{n}{init\PYGZus{}val}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{init\PYGZus{}val}
+\PYG{k}{end}
+\end{Verbatim}

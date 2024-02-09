@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{inc}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{n}{val}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{map}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{k}{fn}\PYG{+w}{ }\PYG{n}{item}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{item}\PYG{o}{+}\PYG{n}{val}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}

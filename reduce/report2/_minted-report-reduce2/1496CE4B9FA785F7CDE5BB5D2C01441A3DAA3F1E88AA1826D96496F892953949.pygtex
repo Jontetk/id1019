@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{sum}\PYG{p}{(}\PYG{n}{list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{reducel}\PYG{p}{(}\PYG{n}{list}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{k}{fn}\PYG{+w}{ }\PYG{n}{item}\PYG{p}{,}\PYG{n}{total}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n}{total}\PYG{o}{+}\PYG{n}{item}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}

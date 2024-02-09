@@ -119,7 +119,7 @@ defmodule Reduceepic do
 
 
   def prod(list) do
-    reducel(list,:nil,fn item,total -> case total do
+    reducel(list,nil,fn item,total -> case total do
       nil -> item
       _ -> item*total
     end end)
@@ -132,8 +132,10 @@ defmodule Reduceepic do
       _ -> false end end)
   end
 
- def a_function_that_takes_a_list_of_integers_and_returns_the_sum_of_the_square_of_all_values_less_than_n(list_of_integers,n) do
-   filterl(list_of_integers,fn item -> item <n end)|> map(fn item -> item**2 end) |> reducel(0,fn item,total ->total+item end)
+ def sum_square_less_than_n(list,n) do
+   filterl(list,fn item -> item <n end)|>
+   map(fn item -> item**2 end) |>
+   reducel(0,fn item,total ->total+item end)
  end
 
 
