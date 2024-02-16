@@ -37,14 +37,9 @@ defmodule Springs do
           case nlth do
             ?# -> {0,mem}
             ?? -> {res,mem} = dynamic_check([?#|[?.|nltt]],[dnh|dnt],mem)
-            {res2,mem} = dynamic_check([?#|[?#|nltt]],[dnh|dnt],mem)
-            {res+res2,mem}
+            {res,mem}
             _ -> dynamic_check([nlth|nltt],dnt,mem)
           end
-        0 -> case length(dnt) do
-          0 -> {0,mem}
-          _ -> dynamic_check([nlth|nltt],dnt,mem)
-        end
 
         _ -> case nlth do
           ?# -> dynamic_check([nlth|nltt],[dnh-1|dnt],mem)
@@ -101,23 +96,12 @@ defmodule Springs do
 
 
 
-  def check_correct([],damaged_num,mem) do
-    case length(damaged_num) do
-      x when x > 1 -> {0,mem}
-      _ ->  [dn] = damaged_num
-        case dn do
-          0 -> {1,mem}
-          _ -> {0,mem}
-        end
-    end
 
-
-  end
 
 
   def dolashiet(stringfuk,num) do
     stringys = parserthingy(stringfuk,num)
-    List.foldl(stringys,0,fn elem,sum -> {string,nums} = elem; {res,_} = check_correct(string,nums,Map.new()); res+sum end)
+    List.foldl(stringys,0,fn elem,sum -> {string,nums} = elem; {res,_} = dynamic_check(string,nums,Map.new()); res+sum end)
   end
 
 

@@ -1,0 +1,109 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Springs Part 1}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+The task was to implement a solver which would check how many different arrangements a set of springs could be in.
+\section*{Implementation}
+The task was solved by first creating a function to parse the string used as input to a more workable format. The parser function starts by splitting the string at every new line character to be able to accept multiple strings at the same time, then each of the strings got split at the space where the two strings returned from the split gets put into a tuple where the first element is a char list of the states of the springs and the second is a list with all numbers for the broken springs 
+\begin{minted}{elixir}
+def parse_string(string) do
+  String.split(string,"\n") |>
+  Enum.map(fn str -> [r1|r2] = String.split(str, " ");
+  {String.to_charlist(r1),String.split(hd(r2),",")|>
+  Enum.map(fn element ->{num,_}= Integer.parse(element);
+  num end)} end)
+end
+\end{minted}
+A simple function takes an input puts it through the parse\_string function and then calls the actual check function for each of the set of instruction and numbers and adds the return of the check to a sum which is finally returned. 
+The check function was implemented in three variants, when the char list had a head and tail and there were numbers in the number list, when the char list did not matter but the number list was empty and finally when the char list only has a head. 
+The first of the check function was when there was both a head and tail with value, the first and second element of the char list was extracted, as well as the first element of the number list. Then the first element was checked, if it was a \# indicating a broken spring the number is checked if it is a one the second element is checked if it is also a hashtag there are more than one hashtag in a sequence where only one should be left so 0 is returned indicating that 
+there are no more arrangements here. If it was a ? the check function is called again with a \# as the first element and a . as the second and then the rest of the lists, to check what would happen if the ? instead was a ., there is no reason to check if the ? was a \# as \#\# with a number of 1 is invalid so it would just return 0 anyway. Finally if it was not a \# or a ? check is run with the next element and the remaining of both the char list and number list. 
+\begin{minted}{elixir}
+def check_correct([nlh|[nlth|nltt]],[dnh|dnt]) do
+  case nlh do
+    ?# -> case dnh do
+      1 ->
+        case nlth do
+          ?# -> 0
+          ?? -> check_correct([?#|[?.|nltt]],[dnh|dnt])
+          _ -> check_correct([nlth|nltt],dnt)
+        end
+\end{minted}
+The next case is if the number anything other than a 1 then the second element is once again checked and if it as a \# the check function is called with the next element and the remaining of the char list, the first element of the number list which is the current number is reduced by one. If the second element was a ? the check function is called with the same number and first element but the second is first replaced with a . and then with a \#. Finally the result of both is combined and returned. If the second was not a \# or ?, 0 is returned.
+\begin{minted}{elixir}
+      _ -> case nlth do
+        ?# -> check_correct([nlth|nltt],[dnh-1|dnt])
+        ?? -> res = check_correct([?#|[?.|nltt]],[dnh|dnt])
+          res2 = check_correct([?#|[?#|nltt]],[dnh|dnt])
+          res+res2
+        _ -> 0
+      end
+    end
+\end{minted} 
+If the first element was not a \# but a ? the next element is checked between two cases either if the second element is a ? or if it is something else. If it is a ? all 4 combinations of . and \# are checked for both first and second element, then the result of all four are combined and returned. If the second was something other than a ? the two combinations of either \# or . is checked as the first element and combined. 
+Finally if the first element was neither a \# or ? the next element is checked with the same number as a . does not decrease the number.
+\begin{minted}{elixir}
+    ?? -> case nlth do
+      ?? -> res = check_correct([?#|[?.|nltt]],[dnh|dnt])
+        res2 = check_correct([?.|[?.|nltt]],[dnh|dnt])
+        res3 = check_correct([?#|[?#|nltt]],[dnh|dnt])
+        res4 = check_correct([?.|[?#|nltt]],[dnh|dnt])
+        res+res2+res3+res4
+
+      _ ->
+        res = check_correct([?#|[nlth|nltt]],[dnh|dnt])
+        res2 = check_correct([?.|[nlth|nltt]],[dnh|dnt])
+        res+res2
+    end
+    _ -> check_correct([nlth|nltt],[dnh|dnt])
+
+  end
+end  
+\end{minted}
+The next version of the check is if the number list is empty then it simply calls itself with a 0 in the number list and the same remaining chars.
+The final check function is for when there is only one element in the char list, this is necessary as the normal check needs both the first and second element. 
+This function first checks the length of the list of numbers, if there are more numbers than one 0 is returned as the current state would not work, if the length of the numbers where not larger than 1 however the number is retrieved. Then the character is checked, if it is a \# and the number is 1, 1 is returned as the state is correct, if it is not one 0 is returned. If the character is a ? the check is called with both a \# and a . to see and then the result for both are combined. Finally if it was not a \# or a ? and the number is 0, 1 returned if the number was something different than 0, 0 is returned.
+\begin{minted}{elixir}
+def check_correct([h],damaged_num) do
+  case length(damaged_num) do
+    x when x > 1 -> 0
+    _ ->  [dn] = damaged_num
+      case h do
+      ?# -> case dn do
+        1 -> 1
+        _ -> 0
+        end
+      ?? -> res = check_correct([?#],damaged_num)
+        res2 = check_correct([?.],damaged_num)
+        res+res2
+      _ -> case dn do
+        0 -> 1
+        _ -> 0
+        end
+    end
+  end
+end
+\end{minted} 
+
+
+\end{document}

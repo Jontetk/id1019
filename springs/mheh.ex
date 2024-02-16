@@ -1,7 +1,7 @@
 defmodule Springs do
 
-  def parserthingy(stringy) do
-    String.split(stringy,"\n") |>
+  def parse_string(string) do
+    String.split(string,"\n") |>
     Enum.map(fn str -> [r1|r2] = String.split(str, " ");
     {String.to_charlist(r1),String.split(hd(r2),",")|>
     Enum.map(fn element ->{num,_}= Integer.parse(element);
@@ -17,15 +17,9 @@ defmodule Springs do
         1 ->
           case nlth do
             ?# -> 0
-            ?? -> res = check_correct([?#|[?.|nltt]],[dnh|dnt])
-            res2 = check_correct([?#|[?#|nltt]],[dnh|dnt])
-            res+res2
+            ?? -> check_correct([?#|[?.|nltt]],[dnh|dnt])
             _ -> check_correct([nlth|nltt],dnt)
           end
-        0 -> case length(dnt) do
-          0 -> 0
-          _ -> check_correct([nlth|nltt],dnt)
-        end
 
         _ -> case nlth do
           ?# -> check_correct([nlth|nltt],[dnh-1|dnt])
@@ -50,8 +44,6 @@ defmodule Springs do
       _ -> check_correct([nlth|nltt],[dnh|dnt])
 
     end
-
-
   end
   def check_correct(remaining,[]) do
     check_correct(remaining,[0])
@@ -82,23 +74,12 @@ defmodule Springs do
 
 
 
-  def check_correct([],damaged_num) do
-    case length(damaged_num) do
-      x when x > 1 -> 0
-      _ ->  [dn] = damaged_num
-        case dn do
-          0 -> 1
-          _ -> 0
-        end
-    end
 
 
-  end
 
-
-  def dolashiet(stringfuk) do
-    stringys = parserthingy(stringfuk)
-    List.foldl(stringys,0,fn elem,sum -> {string,nums} = elem; check_correct(string,nums)+sum end)
+  def dolashiet(input) do
+    strings = parse_string(input)
+    List.foldl(strings,0,fn elem,sum -> {string,nums} = elem; check_correct(string,nums)+sum end)
   end
 
 

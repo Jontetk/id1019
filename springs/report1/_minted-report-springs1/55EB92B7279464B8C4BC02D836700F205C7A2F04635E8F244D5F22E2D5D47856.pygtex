@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{parse\PYGZus{}string}\PYG{p}{(}\PYG{n}{string}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n+nc}{String}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{n}{string}\PYG{p}{,}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{|\PYGZgt{}}
+\PYG{+w}{  }\PYG{n+nc}{Enum}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}\PYG{k}{fn}\PYG{+w}{ }\PYG{n}{str}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{[}\PYG{n}{r1}\PYG{o}{|}\PYG{n}{r2}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{String}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{n}{str}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{n+nc}{String}\PYG{o}{.}\PYG{n}{to\PYGZus{}charlist}\PYG{p}{(}\PYG{n}{r1}\PYG{p}{),}\PYG{n+nc}{String}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{n}{hd}\PYG{p}{(}\PYG{n}{r2}\PYG{p}{),}\PYG{l+s+s2}{\PYGZdq{},\PYGZdq{}}\PYG{p}{)}\PYG{o}{|\PYGZgt{}}
+\PYG{+w}{  }\PYG{n+nc}{Enum}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}\PYG{k}{fn}\PYG{+w}{ }\PYG{n}{element}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{p}{\PYGZob{}}\PYG{n}{num}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{\PYGZcb{}}\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{Integer}\PYG{o}{.}\PYG{n}{parse}\PYG{p}{(}\PYG{n}{element}\PYG{p}{);}
+\PYG{+w}{  }\PYG{n}{num}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)\PYGZcb{}}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}
