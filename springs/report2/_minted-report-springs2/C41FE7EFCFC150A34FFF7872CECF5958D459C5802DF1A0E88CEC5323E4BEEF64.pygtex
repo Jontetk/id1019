@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{dynamic\PYGZus{}check}\PYG{p}{(}\PYG{n}{remaining}\PYG{p}{,}\PYG{n}{numbers}\PYG{p}{,}\PYG{n}{mem}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n+nc}{Map}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{mem}\PYG{p}{,\PYGZob{}}\PYG{n}{remaining}\PYG{p}{,}\PYG{n}{numbers}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{l+s+ss}{:nil}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}\PYG{n}{res}\PYG{p}{,}\PYG{n}{mem}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{check\PYGZus{}correct}\PYG{p}{(}\PYG{n}{remaining}\PYG{p}{,}\PYG{n}{numbers}\PYG{p}{,}\PYG{n}{mem}\PYG{p}{)}
+\PYG{+w}{      }\PYG{n}{mem}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{Map}\PYG{o}{.}\PYG{n}{put}\PYG{p}{(}\PYG{n}{mem}\PYG{p}{,\PYGZob{}}\PYG{n}{remaining}\PYG{p}{,}\PYG{n}{numbers}\PYG{p}{\PYGZcb{},}\PYG{n}{res}\PYG{p}{)}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}\PYG{n}{res}\PYG{p}{,}\PYG{n}{mem}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{n}{res}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{p}{\PYGZob{}}\PYG{n}{res}\PYG{p}{,}\PYG{n}{mem}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

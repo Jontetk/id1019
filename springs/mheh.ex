@@ -1,12 +1,21 @@
 defmodule Springs do
 
-  def parse_string(string) do
-    String.split(string,"\n") |>
-    Enum.map(fn str -> [r1|r2] = String.split(str, " ");
-    {String.to_charlist(r1),String.split(hd(r2),",")|>
+  def string_number_combiner(r2,num) do
+    String.duplicate("#{r2}#{","}",num)
+    |> String.trim_trailing(",")
+  end
+  def remove_last_question(string) do
+    [_|good_string] = String.reverse(string)|>String.to_charlist()
+    String.reverse("#{good_string}")
+  end
+
+  def parse_string(stringy,num) do
+    String.split(stringy,"\n") |>
+    Enum.map(fn str -> [r1|r2] = String.split(str, " ")
+    r1 = String.duplicate("#{r1}#{"?"}",num)|> remove_last_question;
+    {String.to_charlist(r1),String.split(string_number_combiner(hd(r2),num),",")|>
     Enum.map(fn element ->{num,_}= Integer.parse(element);
     num end)} end)
-
   end
 
   def check_correct([nlh|[nlth|nltt]],[dnh|dnt]) do
@@ -77,8 +86,8 @@ defmodule Springs do
 
 
 
-  def dolashiet(input) do
-    strings = parse_string(input)
+  def dolashiet(input,num) do
+    strings = parse_string(input,num)
     List.foldl(strings,0,fn elem,sum -> {string,nums} = elem; check_correct(string,nums)+sum end)
   end
 

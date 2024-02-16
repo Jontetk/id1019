@@ -22,6 +22,104 @@
 \maketitle
 
 \section*{Introduction}
+When using a sequence that has been copied multiple times the program gets extremely slow. To solve this it is possible to save parts of the solution to memory, to speed up the process. 
 \section*{Implementation}
+The first thing that was done was to change the parser to be able to duplicate the string and number multiple times. This was done by first allowing the parser to take in a number representing the number of times the string should be duplicated. 
+Then the sequence part of the string gets duplicated after it has been extracted from the original string, a ? is also added at the end of each duplication, then the string is sent into a function which was added to remove the final ? that gets added when duplicating. The numbers have been replaced 
+by a result of running a second function which duplicates them, this results in a list in the same way as the last solution but both the sequence and list of numbers have been duplicated.
+\begin{minted}{elixir}
+def string_number_combiner(r2,num) do
+  String.duplicate("#{r2}#{","}",num)
+  |> String.trim_trailing(",")
+end
+def remove_last_question(string) do
+  [_|good_string] = String.reverse(string)|>String.to_charlist()
+  String.reverse("#{good_string}")
+end
+
+def parse_string(stringy,num) do
+  String.split(stringy,"\n") |>
+  Enum.map(fn str -> [r1|r2] = String.split(str, " ")
+  r1 = String.duplicate("#{r1}#{"?"}",num)|> remove_last_question;
+  {String.to_charlist(r1),String.split(string_number_combiner(hd(r2),num),",")|>
+  Enum.map(fn element ->{num,_}= Integer.parse(element);
+  num end)} end)
+end
+\end{minted} 
+The next thing that was added was a function for handling the memory, this function simply uses the inbuilt Map function to first check if a tuple containing the remaining sequence and numbers are in the memory if they are not 
+:nil will be returned by the Map so the normal check function is called then the memory is updated with the result of the check function and finally the result and memory is returned. If the remaining and numbers were in the memory, the saved result together with the memory gets returned. 
+\begin{minted}{elixir}
+def dynamic_check(remaining,numbers,mem) do
+  case Map.get(mem,{remaining,numbers}) do
+    :nil ->
+      {res,mem} = check_correct(remaining,numbers,mem)
+      mem = Map.put(mem,{remaining,numbers},res)
+      {res,mem}
+    res ->{res,mem}
+  end
+end
+\end{minted}
+The check function was changed so that it also takes in a memory, every call that previously was for the check function now calls the dynamic function instead, finally every return is replaced with a tuple containing the same return as before but also containing the memory. For example the check function only for when the char list only has one element looks like this now. 
+\begin{minted}{elixir}
+  def check_correct([h],damaged_num,mem) do
+  case length(damaged_num) do
+    x when x > 1 -> {0,mem}
+    _ ->  [dn] = damaged_num
+      case h do
+      ?# -> case dn do
+        1 -> {1,mem}
+        _ -> {0,mem}
+      end
+      ?? -> {res,mem} = dynamic_check([?#],damaged_num,mem)
+        {res2,mem} = dynamic_check([?.],damaged_num,mem)
+        {res+res2,mem}
+      _ -> case dn do
+        0 -> {1,mem}
+        _ -> {0,mem}
+      end
+    end
+  end
+end
+\end{minted}
+Finally the function which previously handled calling of the check function now calls the dynamic function with the memory defined as a new 
+elixir Map.
+\subsection*{Benchmark}
+Both the previous and current version of the spring solver were benchmarked. While the current one did up to 128 duplications in a reasonable time, the previous one was only able to do 5 and that took longer than 128 for the current one. 
+The sequence that was benchmarked looked like this: ?????????? 3,2,1
+\begin{table}[h]
+  \begin{center}
+  \begin{tabular}{l|c|c}
+  \textbf{n} & \textbf{time dynamic ({\textmu}s)} & \textbf{time non dynamic ({\textmu}s)}\\
+  \hline
+  1&        0&       0\\
+  2&      204&     102\\
+  3&      409&    7884\\
+  4&      716&  489472\\
+  5&     1228&32783564\\
+  8&     5529\\
+ 16&    25600\\
+ 32&   198451\\
+ 64&  1371033\\
+128& 12410163\\
+  \end{tabular}
+  \caption{Time it takes to solve the sequence using both dynamic and non dynamic}
+  \label{tab:table1}
+  \end{center}
+  \end{table}
+  \FloatBarrier{\noindent}
+It it interesting that at n = 2 the non dynamic was faster than the dynamic, this is probably because the time it takes to access the memory when the sequence is still relatively small is larger than just doing all the calculations, this might mean that it would be better to use the non dynamic version for smaller sequences. 
+The n = 1 is probably too fast for the timing function to measure, therefore it returns 0.
+The result of the benchmark was also visualized as a graph which also contains mathematical functions close to the time of the benchmarks.
+
+  \begin{figure}[h]
+    \centering    
+    \scalebox{1}{\input{mehhh.tex}}
+    \caption{Visualization of the dynamic compared to non dynamic solution}   
+    \label{tab:figure1} 
+    \end{figure}
+
+
+\FloatBarrier{\noindent}
+The graph shows that the non dynamic version seems to have a trajectory similar to $2^n$, while the dynamic has a trajectory similar to $nlog(n)$. This means that the non dynamic version should have a time complexity close to $O(2^n)$ while the dynamic one has a complexity of $O(nlog(n))$.
 
 \end{document}

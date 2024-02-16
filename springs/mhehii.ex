@@ -8,7 +8,7 @@ defmodule Springs do
     String.reverse("#{good_string}")
   end
 
-  def parserthingy(stringy,num) do
+  def parse_string(stringy,num) do
     String.split(stringy,"\n") |>
     Enum.map(fn str -> [r1|r2] = String.split(str, " ")
     r1 = String.duplicate("#{r1}#{"?"}",num)|> remove_last_question;
@@ -20,10 +20,10 @@ defmodule Springs do
   def dynamic_check(remaining,numbers,mem) do
     case Map.get(mem,{remaining,numbers}) do
       :nil ->
-      {res,mem} = check_correct(remaining,numbers,mem)
-      mem = Map.put(mem,{remaining,numbers},res)
-      {res,mem}
-    res ->{res,mem}
+        {res,mem} = check_correct(remaining,numbers,mem)
+        mem = Map.put(mem,{remaining,numbers},res)
+        {res,mem}
+      res ->{res,mem}
     end
   end
 
@@ -100,7 +100,7 @@ defmodule Springs do
 
 
   def dolashiet(stringfuk,num) do
-    stringys = parserthingy(stringfuk,num)
+    stringys = parse_string(stringfuk,num)
     List.foldl(stringys,0,fn elem,sum -> {string,nums} = elem; {res,_} = dynamic_check(string,nums,Map.new()); res+sum end)
   end
 
