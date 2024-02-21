@@ -10,6 +10,8 @@ def request(chop) do
  send(chop,{:request,self()})
  receive do
   :granted -> :ok
+ after 1000
+  :sorry
  end
 end
 def return(chop) do

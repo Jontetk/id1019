@@ -5,7 +5,7 @@ defmodule Phil do
   @delat 4
 
   def start(name,left,right,hunger) do
-    spawn_link(fn() -> dreaming(name,left,right,hunger)end)
+    spawn_link(fn() -> dreaming(name,left,right,hunger,strength)end)
   end
   def dreaming(name,_,_,0) do
     :io.format("~w is done and happy\n",[name])
@@ -20,6 +20,9 @@ defmodule Phil do
   def waiting(name,left,right,hunger) do
     :io.format("~w is wait\n",[name])
     Chop.request(right)
+    case
+    wait or dream
+    sleep(@delay)
     Chop.request(left)
     eating(name,left,right,hunger)
   end
