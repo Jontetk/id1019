@@ -7,17 +7,18 @@ defmodule Philosopher do
 
 
   def start(hunger,right,left,name,ctrl,strength,guifun) do
-    spawn_link(fn() ->IO.inspect({name,self()}); dreaming(hunger,right,left,name,ctrl,strength,guifun) end)
+    spawn_link(fn() -> dreaming(hunger,right,left,name,ctrl,strength,guifun) end)
   end
   def dreaming(0,_,_,name,ctrl,_,guifun) do
     IO.puts("#{name} is done and happy")
     send(guifun,{:action, name, :done})
     send(ctrl,:done)
+    Process.exit(self(),"exit")
   end
   def dreaming(hunger,right,left,name,ctrl,strength,guifun) do
     IO.puts("#{name} is dream,#{hunger}")
     send(guifun,{:action, name, :leave})
-    sleep(20)
+    sleep(5000)
     waiting(hunger,right,left,name,ctrl,strength,guifun)
   end
   def waiting(hunger,right,left,name,ctrl,strength,guifun) do
@@ -52,11 +53,13 @@ defmodule Philosopher do
   def eating(hunger,right,left,name,ctrl,strength,guifun) do
     IO.puts("#{name} is eat,#{hunger}")
     send(guifun,{:action, name, :enter})
-    sleep(100)
+    sleep(10000)
     Chopstick.return(left)
     Chopstick.return(right)
     dreaming(hunger-1,right,left,name,ctrl,strength,guifun)
   end
+
+
 
 
   def no_longer_able_to_dream(_,_,_,name,ctrl,_,guifun) do

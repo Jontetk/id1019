@@ -7,11 +7,7 @@ defmodule Dinner do
   c4 = Chopstick.start()
   c5 = Chopstick.start()
   ctrl = self()
-  IO.inspect({c1,"c1"})
-  IO.inspect({c2,"c2"})
-  IO.inspect({c3,"c3"})
-  IO.inspect({c4,"c4"})
-  IO.inspect({c5,"c5"})
+
 
   guifun = Gai.start([:arendt,:hypatia,:simone,:elisabeth,:ayn])
   Philosopher.start(5, c1, c2, :arendt, ctrl,5,guifun)
@@ -33,4 +29,5 @@ defmodule Dinner do
     Process.exit(self(), :kill)
     end
     end
+
 end
