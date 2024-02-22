@@ -7,14 +7,27 @@ defmodule Dinner do
   c4 = Chopstick.start()
   c5 = Chopstick.start()
   ctrl = self()
-
-
+  chops=[c1|[c2|[c3|[c4|[c5]]]]]
+  IO.inspect(chops)
   guifun = Gai.start([:arendt,:hypatia,:simone,:elisabeth,:ayn])
-  Philosopher.start(5, c1, c2, :arendt, ctrl,5,guifun)
-  Philosopher.start(5, c2, c3, :hypatia, ctrl,5,guifun)
-  Philosopher.start(5, c3, c4, :simone, ctrl,5,guifun)
-  Philosopher.start(5, c4, c5, :elisabeth, ctrl,5,guifun)
-  Philosopher.start(5, c5, c1, :ayn, ctrl,5,guifun)
+
+  wfun = Waiter.start(chops)
+
+
+
+  phil = Philosopher.start(5, :nil,:nil, :arendt, ctrl,5,guifun,wfun)
+  send(wfun,{:update_map,phil})
+  phil = Philosopher.start(5, :nil,:nil, :hypatia, ctrl,5,guifun,wfun)
+  send(wfun,{:update_map,phil})
+  phil = Philosopher.start(5, :nil,:nil, :simone, ctrl,5,guifun,wfun)
+  send(wfun,{:update_map,phil})
+  phil = Philosopher.start(5, :nil,:nil, :elisabeth, ctrl,5,guifun,wfun)
+  send(wfun,{:update_map,phil})
+  phil = Philosopher.start(5, :nil,:nil, :ayn, ctrl,5,guifun,wfun)
+  send(wfun,{:update_map,phil})
+
+
+
   wait(5, [c1, c2, c3, c4, c5],guifun)
   end
   def wait(0, chopsticks,guifun) do

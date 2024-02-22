@@ -6,65 +6,55 @@ defmodule Philosopher do
   end
 
 
-  def start(hunger,right,left,name,ctrl,strength,guifun) do
-    spawn_link(fn() -> dreaming(hunger,right,left,name,ctrl,strength,guifun) end)
+  def start(hunger,right,left,name,ctrl,strength,guifun,wfun) do
+    spawn_link(fn() -> dreaming(hunger,right,left,name,ctrl,strength,guifun,wfun) end)
   end
-  def dreaming(0,_,_,name,ctrl,_,guifun) do
+  def dreaming(0,_,_,name,ctrl,_,guifun,wfun) do
     IO.puts("#{name} is done and happy")
     send(guifun,{:action, name, :done})
     send(ctrl,:done)
-    Process.exit(self(),"exit")
+    :timer.sleep(:infinity)
   end
-  def dreaming(hunger,right,left,name,ctrl,strength,guifun) do
+  def dreaming(hunger,right,left,name,ctrl,strength,guifun,wfun) do
     IO.puts("#{name} is dream,#{hunger}")
     send(guifun,{:action, name, :leave})
-    sleep(5000)
-    waiting(hunger,right,left,name,ctrl,strength,guifun)
+    sleep(500)
+    waiting(hunger,right,left,name,ctrl,strength,guifun,wfun)
   end
-  def waiting(hunger,right,left,name,ctrl,strength,guifun) do
+  def waiting(hunger,right,left,name,ctrl,strength,guifun,wfun) do
     IO.puts("#{name} is wait,#{hunger}")
     send(guifun,{:action, name, :waiting})
-    case Chopstick.request(left,1000) do
+    case Waiter.request_sticks(wfun) do
       :no ->
       case strength-1 do
-        0 -> no_longer_able_to_dream(hunger,right,left,name,ctrl,strength,guifun)
-        stren -> dreaming(hunger,right,left,name,ctrl,stren,guifun)
+        0 -> no_longer_able_to_dream(hunger,right,left,name,ctrl,strength,guifun,wfun)
+        new_strength -> dreaming(hunger,right,left,name,ctrl,new_strength,guifun,wfun)
         end
 
-      _ -> got_left_chop(hunger,right,left,name,ctrl,strength,guifun)
+      {:ok,c1,c2} -> eating(hunger,c1,c2,name,ctrl,strength,guifun,wfun)
     end
 
 
 
   end
 
-  def got_left_chop(hunger,right,left,name,ctrl,strength,guifun) do
-  sleep(70)
-    case Chopstick.request(right,1000) do # timeout could be done per phil as arg aswell
-      :no -> Chopstick.return(left)
-       case strength-1 do
-      0 -> no_longer_able_to_dream(hunger,right,left,name,ctrl,strength,guifun)
-      stren -> dreaming(hunger,right,left,name,ctrl,stren,guifun)
-      end
-    _ -> eating(hunger,right,left,name,ctrl,strength,guifun)
-  end
-  end
 
-  def eating(hunger,right,left,name,ctrl,strength,guifun) do
+
+  def eating(hunger,right,left,name,ctrl,strength,guifun,wfun) do
     IO.puts("#{name} is eat,#{hunger}")
     send(guifun,{:action, name, :enter})
-    sleep(10000)
-    Chopstick.return(left)
-    Chopstick.return(right)
-    dreaming(hunger-1,right,left,name,ctrl,strength,guifun)
+    sleep(5000)
+    Waiter.return_sticks(wfun,right,left)
+    dreaming(hunger-1,right,left,name,ctrl,strength,guifun,wfun)
   end
 
 
 
 
-  def no_longer_able_to_dream(_,_,_,name,ctrl,_,guifun) do
+  def no_longer_able_to_dream(_,_,_,name,ctrl,_,guifun,wfun) do
     IO.puts("#{name} has eaten their final meal")
     send(guifun,{:action,name,:died})
     send(ctrl,:done)
+    :timer.sleep(:infinity)
   end
 end
