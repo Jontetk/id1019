@@ -55,8 +55,6 @@ defmodule Waiter do
         Chopstick.return(c1)
         Chopstick.return(c2)
         waiting([c1|[c2|chops]],phil_map)
-      {:update_map,phil} ->
-        waiting(chops,Map.put(phil_map,phil,6))
       {:died,phil} ->
         waiting(chops,Map.put(phil_map,phil,:infinity))
 

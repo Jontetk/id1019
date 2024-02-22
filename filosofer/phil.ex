@@ -10,20 +10,20 @@ defmodule Philosopher do
     spawn_link(fn() -> dreaming(hunger,right,left,name,ctrl,strength,guifun,wfun) end)
   end
   def dreaming(0,_,_,name,ctrl,_,guifun,wfun) do
-    IO.puts("#{name} is done and happy")
+    #IO.puts("#{name} is done and happy")
     send(guifun,{:action, name, :done})
     send(ctrl,:done)
     send(wfun,{:died,self()})
     :timer.sleep(:infinity)
   end
   def dreaming(hunger,right,left,name,ctrl,strength,guifun,wfun) do
-    IO.puts("#{name} is dream,#{hunger}")
+    #IO.puts("#{name} is dream,#{hunger}")
     send(guifun,{:action, name, :leave})
-    sleep(1100)
+    sleep(100)
     waiting(hunger,right,left,name,ctrl,strength,guifun,wfun)
   end
   def waiting(hunger,right,left,name,ctrl,strength,guifun,wfun) do
-    IO.puts("#{name} is wait,#{hunger}")
+    #IO.puts("#{name} is wait,#{hunger}")
     send(guifun,{:action, name, :waiting})
     case Waiter.request_sticks(wfun,strength) do
       :no ->
@@ -42,9 +42,9 @@ defmodule Philosopher do
 
 
   def eating(hunger,right,left,name,ctrl,strength,guifun,wfun) do
-    IO.puts("#{name} is eat,#{hunger}")
+    #IO.puts("#{name} is eat,#{hunger}")
     send(guifun,{:action, name, :enter})
-    sleep(1000)
+    sleep(200)
     Waiter.return_sticks(wfun,right,left)
     dreaming(hunger-1,right,left,name,ctrl,strength,guifun,wfun)
   end
@@ -53,9 +53,9 @@ defmodule Philosopher do
 
 
   def no_longer_able_to_dream(_,_,_,name,ctrl,_,guifun,wfun) do
-    IO.puts("#{name} has eaten their final meal")
+    #IO.puts("#{name} has eaten their final meal")
     send(guifun,{:action,name,:died})
-    send(ctrl,:done)
+    send(ctrl,:dead)
     send(wfun,{:died,self()})
     :timer.sleep(:infinity)
   end
