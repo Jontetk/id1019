@@ -13,7 +13,6 @@ end
 
 def request(stick1,stick2,timeout) do
  send(stick1,{:request,self()})
- sleep(40)
  send(stick2,{:request,self()})
  receive do
 

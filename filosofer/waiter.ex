@@ -3,8 +3,8 @@ defmodule Waiter do
   def start(chops) do
     spawn_link(fn() -> waiting(chops,Map.new()) end)
   end
-  def request_sticks(wfun) do
-    send(wfun,{:queue,self()})
+  def request_sticks(wfun,strength) do
+    send(wfun,{:queue,self(),strength})
     receive do
       {:ok,c1,c2} ->
         {:ok,c1,c2}
@@ -21,28 +21,32 @@ defmodule Waiter do
 
   def waiting(chops,phil_map) do
     receive do
-      {:queue,philo} -> case length(chops) do
+      {:queue,philo,strength} ->
+        phil_map = Map.put(phil_map,philo,strength)
+        case length(chops) do
         x when x> 1 ->
-        case List.foldl(Map.to_list(phil_map),{philo,Map.get(phil_map,philo)},fn {key,value},{mkey,mval} -> case value>mval do
+        case List.foldl(Map.to_list(phil_map),{philo,Map.get(phil_map,philo)},fn {key,value},{mkey,mval} -> case value<mval do
           true -> {key,value}
-          false->{mkey,value}
+          false->{mkey,mval}
         end
 
         end ) do
-        {philo,_} ->
-          Map.put(phil_map,philo,0)
+        {^philo,_} ->
+          IO.inspect(philo)
+          IO.inspect(phil_map)
           [c1|[c2|rchops]] = chops
           cresp = Chopstick.request(c1,c2,500)
           send(philo,{cresp,c1,c2})
           waiting(rchops,phil_map)
           _ ->
-            phil_map = Map.put(phil_map,philo,Map.get(phil_map,philo)+1)
+            IO.inspect(phil_map)
             send(philo,:no)
           waiting(chops,phil_map)
         end
 
           _ ->
-            phil_map = Map.put(phil_map,philo,Map.get(phil_map,philo)+1)
+            IO.inspect(phil_map)
+
             send(philo,:no)
           waiting(chops,phil_map)
 
@@ -53,7 +57,9 @@ defmodule Waiter do
         Chopstick.return(c2)
         waiting([c1|[c2|chops]],phil_map)
       {:update_map,phil} ->
-        waiting(chops,Map.put(phil_map,phil,0))
+        waiting(chops,Map.put(phil_map,phil,6))
+      {:died,phil} ->
+        waiting(chops,Map.put(phil_map,phil,:infinity))
 
     end
 

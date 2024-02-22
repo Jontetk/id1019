@@ -15,16 +15,12 @@ defmodule Dinner do
 
 
 
-  phil = Philosopher.start(5, :nil,:nil, :arendt, ctrl,5,guifun,wfun)
-  send(wfun,{:update_map,phil})
-  phil = Philosopher.start(5, :nil,:nil, :hypatia, ctrl,5,guifun,wfun)
-  send(wfun,{:update_map,phil})
-  phil = Philosopher.start(5, :nil,:nil, :simone, ctrl,5,guifun,wfun)
-  send(wfun,{:update_map,phil})
-  phil = Philosopher.start(5, :nil,:nil, :elisabeth, ctrl,5,guifun,wfun)
-  send(wfun,{:update_map,phil})
-  phil = Philosopher.start(5, :nil,:nil, :ayn, ctrl,5,guifun,wfun)
-  send(wfun,{:update_map,phil})
+  Philosopher.start(5, :nil,:nil, :arendt, ctrl,8,guifun,wfun)
+  Philosopher.start(5, :nil,:nil, :hypatia, ctrl,8,guifun,wfun)
+  Philosopher.start(5, :nil,:nil, :simone, ctrl,8,guifun,wfun)
+  Philosopher.start(5, :nil,:nil, :elisabeth, ctrl,8,guifun,wfun)
+  Philosopher.start(5, :nil,:nil, :ayn, ctrl,8,guifun,wfun)
+
 
 
 
