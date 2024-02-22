@@ -32,20 +32,19 @@ defmodule Waiter do
 
         end ) do
         {^philo,_} ->
-          IO.inspect(philo)
-          IO.inspect(phil_map)
+
           [c1|[c2|rchops]] = chops
           cresp = Chopstick.request(c1,c2,500)
           send(philo,{cresp,c1,c2})
           waiting(rchops,phil_map)
           _ ->
-            IO.inspect(phil_map)
+
             send(philo,:no)
           waiting(chops,phil_map)
         end
 
           _ ->
-            IO.inspect(phil_map)
+
 
             send(philo,:no)
           waiting(chops,phil_map)
