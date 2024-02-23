@@ -1,0 +1,79 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Philosophers}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+The task was to implement 5 philosophers and 5 chopstick where each philosopher needed 2 chopsticks to eat. The philosophers and chopsticks 
+are represented as processes. 
+\section*{Implementation}
+The implementation started with creating a Chopstick module. It contains 6 functions, The first is the available function which simply waits to receive either a request for a chopstick or to quit. If it got a request it will send granted to the process that sent the request and then go to the gone function. The gone function will simply wait to receive either a return or a quit. If a return is sent it goes back to available.
+\begin{minted}{elixir}
+def available() do
+  receive do
+    {:request,from} ->
+      send(from,{:granted,self()})
+      gone()
+    :quit -> :ok
+  end
+
+end
+def gone() do
+  receive do
+    :return ->
+    available()
+  :quit -> :ok
+  end
+end
+\end{minted}
+The next function is the start function which creates a chopstick process which calls available using spawn\_link.
+The next function is the request function which takes two stick processes and then sends a request to each of them. If it receives a granted from one of the stick it will wait for a granted on the other stick. However if a granted for one of the sticks is not received within a period defined by the timeout argument the function will return no.
+\begin{minted}{elixir}
+def request(stick1,stick2,timeout) do
+  send(stick1,{:request,self()})
+  send(stick2,{:request,self()})
+  receive do
+   {:granted,^stick1} ->
+     receive do
+       {:granted,^stick2} ->
+         :ok
+       after timeout ->
+         Chopstick.return(stick1)
+          :no
+    end
+   {:granted,^stick2} ->
+     receive do
+       {:granted,^stick1} ->
+         :ok
+       after timeout ->
+         Chopstick.return(stick2)
+          :no
+    end
+ 
+ 
+  after timeout -> :no
+  end  
+end
+\end{minted}
+The final two functions are the return and quit which take a stick and send either a return or a quit to the stick.
+The next module is the waiter 
+
+\end{document}

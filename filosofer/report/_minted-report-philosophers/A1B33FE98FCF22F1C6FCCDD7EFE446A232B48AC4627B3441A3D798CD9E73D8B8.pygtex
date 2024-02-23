@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{request}\PYG{p}{(}\PYG{n}{stick1}\PYG{p}{,}\PYG{n}{stick2}\PYG{p}{,}\PYG{n}{timeout}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{send}\PYG{p}{(}\PYG{n}{stick1}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:request}\PYG{p}{,}\PYG{n}{self}\PYG{p}{()\PYGZcb{})}
+\PYG{+w}{  }\PYG{n}{send}\PYG{p}{(}\PYG{n}{stick2}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:request}\PYG{p}{,}\PYG{n}{self}\PYG{p}{()\PYGZcb{})}
+\PYG{+w}{  }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{   }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:granted}\PYG{p}{,}\PYG{o}{\PYGZca{}}\PYG{n}{stick1}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{     }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{       }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:granted}\PYG{p}{,}\PYG{o}{\PYGZca{}}\PYG{n}{stick2}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{         }\PYG{l+s+ss}{:ok}
+\PYG{+w}{       }\PYG{k}{after}\PYG{+w}{ }\PYG{n}{timeout}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{         }\PYG{n+nc}{Chopstick}\PYG{o}{.}\PYG{n}{return}\PYG{p}{(}\PYG{n}{stick1}\PYG{p}{)}
+\PYG{+w}{          }\PYG{l+s+ss}{:no}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{   }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:granted}\PYG{p}{,}\PYG{o}{\PYGZca{}}\PYG{n}{stick2}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{     }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{       }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:granted}\PYG{p}{,}\PYG{o}{\PYGZca{}}\PYG{n}{stick1}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{         }\PYG{l+s+ss}{:ok}
+\PYG{+w}{       }\PYG{k}{after}\PYG{+w}{ }\PYG{n}{timeout}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{         }\PYG{n+nc}{Chopstick}\PYG{o}{.}\PYG{n}{return}\PYG{p}{(}\PYG{n}{stick2}\PYG{p}{)}
+\PYG{+w}{          }\PYG{l+s+ss}{:no}
+\PYG{+w}{    }\PYG{k}{end}
+
+
+\PYG{+w}{  }\PYG{k}{after}\PYG{+w}{ }\PYG{n}{timeout}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:no}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

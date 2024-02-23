@@ -1,6 +1,6 @@
 defmodule Dinner do
-  def start(hunger,strength,bp), do: spawn(fn -> init(hunger,strength,bp) end)
-  def init(hunger,strength,bp) do
+  def start(hunger,strength,bp,dtime), do: spawn(fn -> init(hunger,strength,bp,dtime) end)
+  def init(hunger,strength,bp,dtime) do
   c1 = Chopstick.start()
   c2 = Chopstick.start()
   c3 = Chopstick.start()
@@ -14,11 +14,11 @@ defmodule Dinner do
 
 
 
-  Philosopher.start(hunger, :nil,:nil, :arendt, ctrl,strength,guifun,wfun)
-  Philosopher.start(hunger, :nil,:nil, :hypatia, ctrl,strength,guifun,wfun)
-  Philosopher.start(hunger, :nil,:nil, :simone, ctrl,strength,guifun,wfun)
-  Philosopher.start(hunger, :nil,:nil, :elisabeth, ctrl,strength,guifun,wfun)
-  Philosopher.start(hunger, :nil,:nil, :ayn, ctrl,strength,guifun,wfun)
+  Philosopher.start(hunger, :nil,:nil, :arendt, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :hypatia, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :simone, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :elisabeth, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :ayn, ctrl,strength,guifun,wfun,dtime)
 
 
 

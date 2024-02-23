@@ -1,0 +1,76 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Ranges}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+
+The task was to complete the first part of day 5 of advent of code 2023. 
+
+\section*{Implementation}
+The first step of the implementation was to implement a function for reading a file containing the seeds and maps, then converting the resulting string into a list containing the seeds and the maps. 
+This function first splits the strings at each double new line, then it takes each element in the split list and removes the text as all maps are assumed to be in the same order so no text is needed, the text is removed by splitting the string at : and then only keeping the tail of the returned list. 
+Then the string is split so each line is in its own list, finally the string is split at each space and then each resulting string is converted to an integer using Integer.parse.
+\begin{minted}{elixir}
+def read_string() do
+  string_list =  File.read!("sample.txt")|>String.split("\n\n")
+  Enum.map(string_list,fn elem -> 
+  t = hd(tl(String.split(elem,":")))|>String.trim()|>String.split("\n");
+  Enum.map(t,fn elem ->String.split(elem," ")|>
+  Enum.map(fn elem -> {num,_}= Integer.parse(elem);num; end)  end) end)
+end
+\end{minted}
+The next function is to resolve the seeds, these need a separate function from the maps as they are only one line. 
+The seed function is very simple, as it simply takes the head of the inputted seeds as the seeds are in two arrays due to the fact that they are all on one line, 
+then each seed is checked using Enum.map using the map\_resolver and the maps. 
+\begin{minted}{elixir}
+def seed([seeds|rest]) do
+  seeds = hd(seeds)
+  Enum.map(seeds,fn cseed -> map_resolver(cseed,rest) end)
+end
+\end{minted}
+The third function is the map\_resolver which takes an input and a list of maps and maps the input to an output, this is done by checking each map and if the input is in the range which is calculated by 
+the input being between the start of the range and the start of the range plus the offset, the input converted with the offset is returned, if no range matching the input is found :nil is returned. The return is checked and if the return is :nil the input is used in the next iteration, if the return was not :nil 
+the return is used in the next iteration. If the map list was empty the input is returned.
+\begin{minted}{elixir}
+def map_resolver(input,[map|next_map]) do
+  case List.foldl(map,:nil,fn [first|[second|[third|_]]],acc ->
+    case acc do
+    :nil ->
+      case input>=second and input <= second+third do
+      true->
+        first-second+input
+      false ->
+        acc
+    end
+    _ -> acc
+    end
+  end) do
+  :nil -> map_resolver(input,next_map)
+  output -> map_resolver(output,next_map)
+ end
+end
+def map_resolver(input,[]) do
+  input
+end
+\end{minted}
+The final function simply calls the seed function with the result of the read\_string function and then checks the output for the lowest value. which is then returned.
+\end{document}

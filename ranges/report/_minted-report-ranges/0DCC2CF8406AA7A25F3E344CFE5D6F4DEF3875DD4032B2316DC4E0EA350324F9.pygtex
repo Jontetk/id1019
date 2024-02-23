@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{seed}\PYG{p}{([}\PYG{n}{seeds}\PYG{o}{|}\PYG{n}{rest}\PYG{p}{])}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{seeds}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hd}\PYG{p}{(}\PYG{n}{seeds}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n+nc}{Enum}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}\PYG{n}{seeds}\PYG{p}{,}\PYG{k}{fn}\PYG{+w}{ }\PYG{n}{cseed}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{map\PYGZus{}resolver}\PYG{p}{(}\PYG{n}{cseed}\PYG{p}{,}\PYG{n}{rest}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}
