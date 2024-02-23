@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  23 FEB 2024 13:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  23 FEB 2024 19:14
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -502,7 +502,28 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
 
  (./_minted-report-philosophers/A1B33FE98FCF22F1C6FCCDD7EFE446A232B48AC4627B3441A3D798CD9E73D8B8.pygtex [1
 
-{g:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) [2] (./report-philosophers.aux)
+{g:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+\openout3 = `report-philosophers.pyg'.
+
+ (./_minted-report-philosophers/BBE5AE56AA86243CB3425E0A612976F732B48AC4627B3441A3D798CD9E73D8B8.pygtex [2])
+\openout3 = `report-philosophers.pyg'.
+
+ (./_minted-report-philosophers/08757F7B7C23025050B176B4F5FD3AEE32B48AC4627B3441A3D798CD9E73D8B8.pygtex [3])
+\openout3 = `report-philosophers.pyg'.
+
+ (./_minted-report-philosophers/A1D90A928B16A3915C5A18D7F2E3030E32B48AC4627B3441A3D798CD9E73D8B8.pygtex)
+\openout3 = `report-philosophers.pyg'.
+
+ (./_minted-report-philosophers/23013D078F7EC070B7331E540A868E9532B48AC4627B3441A3D798CD9E73D8B8.pygtex [4])
+\openout3 = `report-philosophers.pyg'.
+
+ (./_minted-report-philosophers/26B8988737E92D78E70E688D7903172C32B48AC4627B3441A3D798CD9E73D8B8.pygtex)
+\openout3 = `report-philosophers.pyg'.
+
+ (./_minted-report-philosophers/C697B536AC952B7B6F380D00B4D20AB532B48AC4627B3441A3D798CD9E73D8B8.pygtex) [5]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 200.
+ [6] [7] (./report-philosophers.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-11>
@@ -511,18 +532,18 @@ runsystem(del report-philosophers.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27195 strings out of 475188
- 694132 string characters out of 5767814
- 1923248 words of memory out of 5000000
- 48059 multiletter control sequences out of 15000+600000
- 562484 words of font info for 51 fonts, out of 8000000 for 9000
+ 27254 strings out of 475188
+ 698451 string characters out of 5767814
+ 1934248 words of memory out of 5000000
+ 48098 multiletter control sequences out of 15000+600000
+ 563883 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,6n,103p,789b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report-philosophers.pdf (2 pages, 57578 bytes).
+ 99i,9n,103p,789b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><g:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on report-philosophers.pdf (7 pages, 92064 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
- 21 compressed objects within 1 object stream
+ 61 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

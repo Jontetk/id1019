@@ -14,7 +14,7 @@ defmodule Philosopher do
     send(guifun,{:action, name, :done})
     send(ctrl,:done)
     send(wfun,{:died,self()})
-    :timer.sleep(:infinity)
+    :ok
   end
   def dreaming(hunger,right,left,name,ctrl,strength,guifun,wfun,dtime) do
     #IO.puts("#{name} is dream,#{hunger}")
@@ -34,9 +34,6 @@ defmodule Philosopher do
 
       {:ok,c1,c2} -> eating(hunger,c1,c2,name,ctrl,strength,guifun,wfun,dtime)
     end
-
-
-
   end
 
 
@@ -46,7 +43,7 @@ defmodule Philosopher do
     send(guifun,{:action, name, :enter})
     sleep(200)
     Waiter.return_sticks(wfun,right,left)
-    dreaming(hunger-1,right,left,name,ctrl,strength,guifun,wfun,dtime)
+    dreaming(hunger-1,:nil,:nil,name,ctrl,strength,guifun,wfun,dtime)
   end
 
 
@@ -57,6 +54,6 @@ defmodule Philosopher do
     send(guifun,{:action,name,:died})
     send(ctrl,:dead)
     send(wfun,{:died,self()})
-    :timer.sleep(:infinity)
+    :ok
   end
 end

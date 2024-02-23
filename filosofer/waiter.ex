@@ -16,6 +16,9 @@ defmodule Waiter do
   def return_sticks(wfun,c1,c2) do
     send(wfun,{:return,c1,c2})
   end
+  def quit(wfun) do
+    send(wfun,:quit)
+  end
 
 
 
@@ -32,24 +35,17 @@ defmodule Waiter do
 
         end ) do
         {^philo,_} ->
-
           [c1|[c2|rchops]] = chops
           cresp = Chopstick.request(c1,c2,500)
           send(philo,{cresp,c1,c2})
           waiting(rchops,phil_map)
-          _ ->
-
-            send(philo,:no)
+        _ ->
+          send(philo,:no)
           waiting(chops,phil_map)
         end
-
           _ ->
-
-
             send(philo,:no)
           waiting(chops,phil_map)
-
-
       end
       {:return,c1,c2} ->
         Chopstick.return(c1)
@@ -57,6 +53,7 @@ defmodule Waiter do
         waiting([c1|[c2|chops]],phil_map)
       {:died,phil} ->
         waiting(chops,Map.put(phil_map,phil,:infinity))
+      :quit -> :ok
 
     end
 

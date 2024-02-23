@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{eating}\PYG{p}{(}\PYG{n}{hunger}\PYG{p}{,}\PYG{n}{right}\PYG{p}{,}\PYG{n}{left}\PYG{p}{,}\PYG{n}{name}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{strength}\PYG{p}{,}\PYG{n}{guifun}\PYG{p}{,}\PYG{n}{wfun}\PYG{p}{,}\PYG{n}{dtime}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{c+c1}{\PYGZsh{}IO.puts(\PYGZdq{}\PYGZsh{}\PYGZob{}name\PYGZcb{} is eat,\PYGZsh{}\PYGZob{}hunger\PYGZcb{}\PYGZdq{})}
+\PYG{+w}{  }\PYG{n}{send}\PYG{p}{(}\PYG{n}{guifun}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:action}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{name}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+ss}{:enter}\PYG{p}{\PYGZcb{})}
+\PYG{+w}{  }\PYG{n}{sleep}\PYG{p}{(}\PYG{l+m+mi}{200}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n+nc}{Waiter}\PYG{o}{.}\PYG{n}{return\PYGZus{}sticks}\PYG{p}{(}\PYG{n}{wfun}\PYG{p}{,}\PYG{n}{right}\PYG{p}{,}\PYG{n}{left}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n}{dreaming}\PYG{p}{(}\PYG{n}{hunger}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+s+ss}{:nil}\PYG{p}{,}\PYG{l+s+ss}{:nil}\PYG{p}{,}\PYG{n}{name}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{strength}\PYG{p}{,}\PYG{n}{guifun}\PYG{p}{,}\PYG{n}{wfun}\PYG{p}{,}\PYG{n}{dtime}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}
