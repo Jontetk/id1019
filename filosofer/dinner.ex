@@ -1,39 +1,45 @@
 defmodule Dinner do
-  def start(), do: spawn(fn -> init() end)
-  def init() do
+  def start(hunger,strength,bp,dtime), do: spawn_link(fn -> init(hunger,strength,bp,dtime) end)
+  def init(hunger,strength,bp,dtime) do
   c1 = Chopstick.start()
   c2 = Chopstick.start()
   c3 = Chopstick.start()
   c4 = Chopstick.start()
   c5 = Chopstick.start()
+
+
   ctrl = self()
   chops=[c1|[c2|[c3|[c4|[c5]]]]]
-  IO.inspect(chops)
   guifun = Gai.start([:arendt,:hypatia,:simone,:elisabeth,:ayn])
 
   wfun = Waiter.start(chops)
 
 
 
-  Philosopher.start(5, :nil,:nil, :arendt, ctrl,8,guifun,wfun)
-  Philosopher.start(5, :nil,:nil, :hypatia, ctrl,8,guifun,wfun)
-  Philosopher.start(5, :nil,:nil, :simone, ctrl,8,guifun,wfun)
-  Philosopher.start(5, :nil,:nil, :elisabeth, ctrl,8,guifun,wfun)
-  Philosopher.start(5, :nil,:nil, :ayn, ctrl,8,guifun,wfun)
+  Philosopher.start(hunger, :nil,:nil, :arendt, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :hypatia, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :simone, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :elisabeth, ctrl,strength,guifun,wfun,dtime)
+  Philosopher.start(hunger, :nil,:nil, :ayn, ctrl,strength,guifun,wfun,dtime)
 
 
 
 
-  wait(5, [c1, c2, c3, c4, c5],guifun)
+  wait(5, [c1, c2, c3, c4, c5],guifun,bp,0,0,wfun)
   end
-  def wait(0, chopsticks,guifun) do
+  def wait(0, chopsticks,guifun,bp,d,c,wfun) do
     Enum.each(chopsticks, fn(c) -> Chopstick.quit(c) end)
+    Waiter.quit(wfun)
     Process.exit(guifun,:kill)
+
+    send(bp,{:dinner_done,d,c})
     end
-    def wait(n, chopsticks,guifun) do
+    def wait(n, chopsticks,guifun,bp,d,c,wfun) do
     receive do
     :done ->
-    wait(n - 1, chopsticks,guifun)
+    wait(n - 1, chopsticks,guifun,bp,d,c+1,wfun)
+    :dead ->
+      wait(n - 1, chopsticks,guifun,bp,d+1,c,wfun)
     :abort ->
     Process.exit(self(), :kill)
     end

@@ -1,0 +1,224 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Philosophers}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+The task was to implement 5 philosophers and 5 chopstick where each philosopher needed 2 chopsticks to eat. The philosophers and chopsticks 
+are represented as processes. 
+\section*{Implementation}
+The implementation started with creating a Chopstick module. It contains 6 functions, The first is the available function which simply waits to receive either a request for a chopstick or to quit. If it got a request it will send granted to the process that sent the request and then go to the gone function. The gone function will simply wait to receive either a return or a quit. If a return is sent it goes back to available.
+\begin{minted}{elixir}
+def available() do
+  receive do
+    {:request,from} ->
+      send(from,{:granted,self()})
+      gone()
+    :quit -> :ok
+  end
+
+end
+def gone() do
+  receive do
+    :return ->
+    available()
+  :quit -> :ok
+  end
+end
+\end{minted}
+The next function is the start function which creates a chopstick process which calls available using spawn\_link.
+The next function is the request function which takes two stick processes and then sends a request to each of them. If it receives a granted from one of the stick it will wait for a granted on the other stick. However if a granted for one of the sticks is not received within a period defined by the timeout argument the function will return no.
+\begin{minted}{elixir}
+def request(stick1,stick2,timeout) do
+  send(stick1,{:request,self()})
+  send(stick2,{:request,self()})
+  receive do
+   {:granted,^stick1} ->
+     receive do
+       {:granted,^stick2} ->
+         :ok
+       after timeout ->
+         Chopstick.return(stick1)
+          :no
+    end
+   {:granted,^stick2} ->
+     receive do
+       {:granted,^stick1} ->
+         :ok
+       after timeout ->
+         Chopstick.return(stick2)
+          :no
+    end
+ 
+ 
+  after timeout -> :no
+  end  
+end
+\end{minted}
+The final two functions are the return and quit which take a stick and send either a return or a quit to the stick.
+The next module is the waiter its main function is waiting, which takes a list of chopsticks and a map of philosophers. 
+The function then waits to receive one of multiple messages from another process. The first message is queue which takes a philosopher and the strength of the philosopher. It first updates the strength value in the map of the philosophers with the current philosopher. It then checks how many chopsticks are left in the list of chopsticks.
+If there are more than one chopstick it first checks if the current philosopher in the map of philosopher has the lowest strength value, if it did it is allocated two chopsticks, the response from the chopstick request function is also sent incase it failed the philosopher will not get the chopsticks. Then the waiting function is called again but with the remaining chopsticks. If the current philosopher is not the one with lowest strength the function will respond with :no and then call itself. 
+If there was not more than one chopstick the function will also return :no and then call itself. 
+\begin{minted}{elixir}
+def waiting(chops,phil_map) do
+  receive do
+    {:queue,philo,strength} ->
+      phil_map = Map.put(phil_map,philo,strength)
+      case length(chops) do
+      x when x> 1 ->
+      case List.foldl(Map.to_list(phil_map),{philo,Map.get(phil_map,philo)},fn {key,value},{mkey,mval} -> case value<mval do
+        true -> {key,value}
+        false->{mkey,mval}
+      end
+      end ) do
+      {^philo,_} ->
+        [c1|[c2|rchops]] = chops
+        cresp = Chopstick.request(c1,c2,500)
+        send(philo,{cresp,c1,c2})
+        waiting(rchops,phil_map)
+      _ ->
+        send(philo,:no)
+        waiting(chops,phil_map)
+      end
+        _ ->
+          send(philo,:no)
+        waiting(chops,phil_map)
+    end
+\end{minted}
+This implementation of the waiter makes it possible to make sure that only the one with the lowest strength is allowed to get chopsticks. 
+This could however increase the delay of running the function however as some philosophers will have to go back to dreaming without eating even if there are chopsticks available. 
+Two other possible implementations are to instead of keeping track of the strength keep track of who has not eaten for the longest time and only give them the chopsticks. A final implementation would be to just give whoever asks first the chopsticks, this could become very unfair for the philosophers however, as 
+depending on timing the same philosophers could get to eat over and over again while the others never get to eat. 
+The other messages that the function accepts is the return with two chopsticks, this simply calls return on both chopsticks and then calls itself again with the chopstick re added to the list of chopsticks, 
+the next message is died with a philosopher. This sets that philosophers strength value in the philosopher map so that it does not block other philosophers from eating.
+The final message is quit which simply returns :ok
+\begin{minted}{elixir}
+  {:return,c1,c2} ->
+        Chopstick.return(c1)
+        Chopstick.return(c2)
+        waiting([c1|[c2|chops]],phil_map)
+  {:died,phil} ->
+    waiting(chops,Map.put(phil_map,phil,:infinity))
+  :quit -> :ok
+  end
+end
+\end{minted}
+The remaining functions in the waiter module is start which takes a list of chopsticks and uses spawn\_link to start waiting with the chopsticks and a new map, a new map can be used as the philosophers get added once they call waiting.
+The next one is a request function which sends a message to the waiter that a philosopher wants to get some chopsticks, then it can either get back ok with the two chopsticks, which it returns or something elses, which would mean that either the request for a specific chopstick failed in chopsticks, the philosopher was not the lowest strength or there was not more than one chopsticks available.
+It will then simply return :no. The next function is the return sticks which sends a return message to the waiter containing chopsticks given as argument to the function.
+The final function is quit which simply sends :quit to the waiter.
+\begin{minted}{elixir}
+def request_sticks(wfun,strength) do
+  send(wfun,{:queue,self(),strength})
+  receive do
+    {:ok,c1,c2} ->
+      {:ok,c1,c2}
+    _->
+      :no
+  end
+end
+\end{minted}
+
+The philosopher module is the final important module for the task. 
+It has multiple different functions representing different states of the philosophers.
+The first function is the dreaming function it has two versions, one where hunger is 0 and the other one where the hunger is not 1. When the hunger is 0 the philosopher is happy, 
+so it tells the gui, ctrl and waiter that it is complete and then returns :ok.
+The function for dreaming when the hunger is not 0, tells the gui that it is dreaming, then it uses sleep for a specified dtime which is given as an argument when the process is started, after sleeping it calls waiting. 
+\begin{minted}{elixir}
+def dreaming(0,_,_,name,ctrl,_,guifun,wfun,dtime) do
+  #IO.puts("#{name} is done and happy")
+  send(guifun,{:action, name, :done})
+  send(ctrl,:done)
+  send(wfun,{:died,self()})
+  :ok
+end
+def dreaming(hunger,right,left,name,ctrl,strength,guifun,wfun,dtime) do
+  #IO.puts("#{name} is dream,#{hunger}")
+  send(guifun,{:action, name, :leave})
+  sleep(dtime)
+  waiting(hunger,right,left,name,ctrl,strength,guifun,wfun,dtime)
+end  
+\end{minted}
+The next function, waiting first tells the gui that the philosopher is waiting, then it asks the waiter for sticks, if it did not get any sticks it reduces strength by one, if the strength is 0 the philosopher is dead so it calls no\_longer\_able\_to\_dream. 
+If the new strength was not 0 it goes back to dreaming with the new strength. If it got chopsticks, it will call eating with them. 
+\begin{minted}{elixir}
+def waiting(hunger,right,left,name,ctrl,strength,guifun,wfun,dtime) do
+  #IO.puts("#{name} is wait,#{hunger}")
+  send(guifun,{:action, name, :waiting})
+  case Waiter.request_sticks(wfun,strength) do
+    :no ->
+    case strength-1 do
+      0 -> no_longer_able_to_dream(hunger,right,left,name,ctrl,strength,guifun,wfun,dtime)
+      new_strength -> dreaming(hunger,right,left,name,ctrl,new_strength,guifun,wfun,dtime)
+      end
+
+    {:ok,c1,c2} -> eating(hunger,c1,c2,name,ctrl,strength,guifun,wfun,dtime)
+  end
+end  
+\end{minted}
+eating is done by first telling the gui that eating is occurring, then sleep is used to pause the philosopher for 200 milliseconds, after it has finished eating it tells the waiter to return the sticks and finally 
+goes back to dreaming with the sticks set as :nil.
+\begin{minted}{elixir}
+def eating(hunger,right,left,name,ctrl,strength,guifun,wfun,dtime) do
+  #IO.puts("#{name} is eat,#{hunger}")
+  send(guifun,{:action, name, :enter})
+  sleep(200)
+  Waiter.return_sticks(wfun,right,left)
+  dreaming(hunger-1,:nil,:nil,name,ctrl,strength,guifun,wfun,dtime)
+end
+\end{minted}
+The function no\_longer\_able\_to\_dream works similar to the dreaming with no hunger but it tells the gui and ctrl that it has died instead of completed, the waiter gets told the same thing as there is not difference between completing or dying for the waiter.
+The start simply uses spawn\_link to call dreaming with the same arguments as it got.
+The final module for the program is the dinner, which starts all chopsticks, then sets ctrl as itself, then saves the chopsticks to a list, then starts the gui with the names of the philosophers. It then starts the waiter using the list of chopsticks. Then the philosophers are started with hunger as the hunger the dinner was given, 
+both chopsticks as :nil, a name, the ctrl, a strength given to dinner as argument, the gui, the waiter and finally the dream time also given to dinner as argument. 
+It then calls wait which keeps track of how many philosophers are left, and decreases that number each time it is run, it also keeps track of how many philosophers have completed and how many have died. Finally when the remaining philosophers reaches 0 the waiter tells all the chopsticks and waiter to quit, it kills the gui process, then finally 
+sends the amount of dead and completed philosophers to the process that started the dinner. 
+\subsection*{Benchmarking And Discussion}
+The benchmarking was done by having a set amount of hunger(h), and then varying the amount of strength(s) and dreaming time(dt) the philosophers have, then the amount of completed(c) and dead philosophers(d) were returned as well as the time in milliseconds(t). 
+The expected time(et) calculated from how long it would take one philosopher to eat and dream to remove the amount of hunger without randomness is also in the table below. 
+\begin{table}[h]
+  \begin{center}
+  \begin{tabular}{c|c|c|c|c|c|c}
+  \textbf{h} &\textbf{s} & \textbf{dt} &\textbf{t} & \textbf{d}& \textbf{c} & \textbf{et}\\
+  \hline
+  10   & 1  &  100 &  1661 &  3 &  2 &3000 \\
+  10   & 4  &  100 &  1928 &  3 &  2 &3000 \\
+  10   & 8  &  100 &  2042 &  3 &  2 &3000 \\
+  10   & 16 &  100 &  2466 &  3 &  2 &3000 \\
+  10   & 32 &  100 &  3383 &  0 &  5 &3000 \\
+  10   & 1  &  250 &  2322 &  3 &  2 &4500\\
+  10   & 4  &  250 &  2812 &  3 &  2 &4500\\
+  10   & 8  &  250 &  3150 &  3 &  2 &4500\\
+  10   & 16 &  250 &  4207 &  2 &  3 &4500\\
+  10   & 32 &  250 &  4248 &  0 &  5 &4500\\
+  \end{tabular}
+  \caption{Table for benchmark}
+  \label{tab:table1}
+  \end{center}
+  \end{table}
+  \FloatBarrier{\noindent}
+Due to the fact that the sleep is randomized based on the number inputted the actual time is sometimes less than the expected. When randomness is removed from the sleep, 
+the time is always more than the expected. However this creates a less interesting result as there will always be 3 dead except for when the time is 250 and the strength is 32. Where everyone will survive. 
+As the waiter is designed to always let the least strength eat first the strength goes down for all the philosophers at around the same pace, however as only two philosophers can eat at the same time and the others will be asking the waiter, and decreasing their strength, some will die unless, the strength and/or the sleep time is long enough so that they can outlive the wait for the current eaters. 
+However as two can eat at the same time there will always be 2 alive if not more, the last two alive gets decided when the third death occurs, as the last two will always have enough chopsticks to survive. Due to the waiter directly telling the philosophers that they can either eat or go back to dreaming there should be no deadlocks happening in the current implementation, however it might be possible to make the implementation more fair towards the philosophers by having them wait for chopsticks from the waiter instead of going immediately back to the dreaming stage.
+
+\end{document}

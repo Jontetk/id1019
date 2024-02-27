@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:return}\PYG{p}{,}\PYG{n}{c1}\PYG{p}{,}\PYG{n}{c2}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{        }\PYG{n+nc}{Chopstick}\PYG{o}{.}\PYG{n}{return}\PYG{p}{(}\PYG{n}{c1}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nc}{Chopstick}\PYG{o}{.}\PYG{n}{return}\PYG{p}{(}\PYG{n}{c2}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n}{waiting}\PYG{p}{([}\PYG{n}{c1}\PYG{o}{|}\PYG{p}{[}\PYG{n}{c2}\PYG{o}{|}\PYG{n}{chops}\PYG{p}{]],}\PYG{n}{phil\PYGZus{}map}\PYG{p}{)}
+\PYG{+w}{  }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:died}\PYG{p}{,}\PYG{n}{phil}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{    }\PYG{n}{waiting}\PYG{p}{(}\PYG{n}{chops}\PYG{p}{,}\PYG{n+nc}{Map}\PYG{o}{.}\PYG{n}{put}\PYG{p}{(}\PYG{n}{phil\PYGZus{}map}\PYG{p}{,}\PYG{n}{phil}\PYG{p}{,}\PYG{l+s+ss}{:infinity}\PYG{p}{))}
+\PYG{+w}{  }\PYG{l+s+ss}{:quit}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:ok}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

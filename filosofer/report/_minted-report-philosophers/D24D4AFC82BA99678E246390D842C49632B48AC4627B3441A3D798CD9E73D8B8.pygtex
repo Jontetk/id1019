@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{available}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:request}\PYG{p}{,}\PYG{n}{from}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{n}{send}\PYG{p}{(}\PYG{n}{from}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:granted}\PYG{p}{,}\PYG{n}{self}\PYG{p}{()\PYGZcb{})}
+\PYG{+w}{      }\PYG{n}{gone}\PYG{p}{()}
+\PYG{+w}{    }\PYG{l+s+ss}{:quit}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:ok}
+\PYG{+w}{  }\PYG{k}{end}
+
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{gone}\PYG{p}{()}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{l+s+ss}{:return}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{    }\PYG{n}{available}\PYG{p}{()}
+\PYG{+w}{  }\PYG{l+s+ss}{:quit}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:ok}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}
