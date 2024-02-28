@@ -66,7 +66,7 @@ defmodule Brot do
 end
 
 defmodule Color do
-  def convert(depth,max) do
+  def convert_gray(depth,max) do
     gray = trunc((depth/max)*255)
     {:rgb,gray,gray,gray}
   end
@@ -79,12 +79,10 @@ defmodule Mandel do
     trans = fn(w, h) ->
       Cmplx.new(x + k * (w - 1), y - k * (h - 1))
     end
-    rows(width, height, trans, depth, [])
+    rows(width, height, trans, depth, [[Color.convert(Brot.mandelbrot(trans.(0,0),depth),depth)]],1,0)
   end
 
-  def rows(width,height,trans,depth,list) do
-    rows(width,height,trans,depth,[[Color.convert(Brot.mandelbrot(trans.(0,0),depth),depth)]],1,0)
-  end
+
   def rows(width,height,trans,depth,[hlist|tlist],x,y) do
     case x == width do
       true ->rows(width,height,trans,depth,[[]|[hlist|tlist]],0,y+1)
@@ -95,12 +93,12 @@ defmodule Mandel do
     end
   end
   def demo() do
-    small(-2.6, 1.2, 1.2)
+    small(-2.6,2.5, 2.5)
     end
     def small(x0, y0, xn) do
       width = 1000
-      height = 600
-    depth = 1000
+      height = 1000
+    depth = 50
     k = (xn - x0) / width
     image = tl(Mandel.mandelbrot(width, height, x0, y0, k, depth))
     PPM.write("small.ppm", image)
