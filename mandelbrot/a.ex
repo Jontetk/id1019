@@ -66,8 +66,20 @@ end
 
 defmodule Color do
   def convert(depth,max) do
+    convert_bluered(depth,max)
+  end
+
+  def convert_gray(depth,max) do
     gray = trunc((depth/max)*255)
     {:rgb,gray,gray,gray}
+  end
+  def convert_blue(depth,max) do
+    blue = trunc((depth/max)*255)
+    {:rgb,0,0,blue}
+  end
+  def convert_bluered(depth,max) do
+    color = trunc((depth/max)*255)
+    {:rgb,color,0,color}
   end
 
 
