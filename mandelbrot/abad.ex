@@ -107,9 +107,9 @@ defmodule Mandel do
     :timer.tc(fn()->small(-2.6,2.5, 2.5)end)
     end
     def small(x0, y0, xn) do
-      width = 500
-      height = 500
-    depth = 50
+      width = 1000
+      height = 1000
+    depth = 500
     k = (xn - x0) / width
     image = Mandel.mandelbrot(width, height, x0, y0, k, depth)
     PPM.write("small.ppm", image)
