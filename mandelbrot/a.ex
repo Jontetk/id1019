@@ -162,6 +162,18 @@ defmodule Mandel do
 
   end
   def mandel_calc(width,height,trans,depth,ctrl,x,y,proc_num) do
+    case x == width do
+      true -> mandel_calc(width,height,trans,depth,ctrl,0,y+1,proc_num)
+      false -> case y==height do
+        false -> mandel_calc_go(width,height,trans,depth,ctrl,x,y,proc_num)
+        true -> :error
+      end
+      end
+  end
+  def mandel_calc_go(width,height,trans,depth,ctrl,x,y,proc_num) do
+
+
+
     res = Color.convert(Brot.mandelbrot(trans.(x,y),depth),depth)
     self = self()
     send(ctrl,{:mand_done,proc_num,res,self})
@@ -174,11 +186,11 @@ defmodule Mandel do
 
 
   def demo() do
-    small(-2.6,2.5, 2.5)
+    :timer.tc(fn()->small(-2.6,2.5, 2.5)end)
     end
     def small(x0, y0, xn) do
-      width = 1000
-      height = 1000
+      width = 500
+      height = 500
     depth = 50
     k = (xn - x0) / width
     image = Mandel.mandelbrot(width, height, x0, y0, k, depth)
