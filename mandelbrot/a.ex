@@ -52,21 +52,20 @@ defmodule Brot do
     i = 0
     test(i, z0, c, m)
     end
+  def test(m,_,_,m) do
+    0
+  end
 
   def test(i,z,c,m) do
-
-    case m > i do
-    true ->  case Cmplx.abs(z) do
+      case Cmplx.abs(z) do
         x when x>2 -> i
         _ -> test(i+1,Cmplx.add(Cmplx.sqr(z),c),c,m)
       end
-    _ -> 0
-    end
   end
 end
 
 defmodule Color do
-  def convert_gray(depth,max) do
+  def convert(depth,max) do
     gray = trunc((depth/max)*255)
     {:rgb,gray,gray,gray}
   end
