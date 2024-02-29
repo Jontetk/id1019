@@ -66,7 +66,7 @@ end
 
 defmodule Color do
   def convert(depth,max) do
-    convert_bluered(depth,max)
+    convert_rain(depth,max)
   end
 
   def convert_gray(depth,max) do
@@ -81,6 +81,19 @@ defmodule Color do
     color = trunc((depth/max)*255)
     {:rgb,color,0,color}
   end
+  def convert_rain(depth,max) do
+    color = trunc((depth/max)*255)
+    case(div(color,51)) do
+      0 -> {:rgb,color,0,0}
+      1->{:rgb,color,color,0}
+      2->{:rgb,0,color,0}
+      3->{:rgb,0,color,color}
+      4->{:rgb,0,0,color}
+      5->{:rgb,color,0,color}
+      6->{:rgb,color,color,color}
+    end
+  end
+
 
 
 end

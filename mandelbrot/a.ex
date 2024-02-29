@@ -105,13 +105,7 @@ defmodule Mandel do
   end
 
   def process_creator(width,height,trans,depth,ctrl,x,y,proc_num,num,processes) do
-    case x == width do
-      true -> process_creator(width,height,trans,depth,ctrl,0,y+1,proc_num,num,processes)
-      false -> case y==height do
-        true -> processes
-        false -> process_creator(width,height,trans,depth,ctrl,x+1,y,proc_num+1,num-1,[spawn(fn () -> mandel_calc(width,height,trans,depth,ctrl,x,y,proc_num) end)|processes])
-      end
-    end
+        process_creator(width,height,trans,depth,ctrl,x+1,y,proc_num+1,num-1,[spawn(fn () -> mandel_calc(width,height,trans,depth,ctrl,x,y,proc_num) end)|processes])
   end
 
 
@@ -162,17 +156,6 @@ defmodule Mandel do
 
   end
   def mandel_calc(width,height,trans,depth,ctrl,x,y,proc_num) do
-    case x == width do
-      true -> mandel_calc(width,height,trans,depth,ctrl,0,y+1,proc_num)
-      false -> case y==height do
-        false -> mandel_calc_go(width,height,trans,depth,ctrl,x,y,proc_num)
-        true -> :error
-      end
-      end
-  end
-  def mandel_calc_go(width,height,trans,depth,ctrl,x,y,proc_num) do
-
-
 
     res = Color.convert(Brot.mandelbrot(trans.(x,y),depth),depth)
     self = self()
