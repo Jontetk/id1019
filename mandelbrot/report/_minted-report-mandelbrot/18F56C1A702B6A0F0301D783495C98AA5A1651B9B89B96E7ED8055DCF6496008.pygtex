@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{defmodule}\PYG{+w}{ }\PYG{n+nc}{Cmplx}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{new}\PYG{p}{(}\PYG{n}{r}\PYG{p}{,}\PYG{n}{i}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{r}\PYG{p}{,}\PYG{n}{i}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{add}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{ar}\PYG{p}{,}\PYG{n}{ai}\PYG{p}{\PYGZcb{},\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{br}\PYG{p}{,}\PYG{n}{bi}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{ar}\PYG{o}{+}\PYG{n}{br}\PYG{p}{,}\PYG{n}{ai}\PYG{o}{+}\PYG{n}{bi}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{sqr}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{r}\PYG{p}{,}\PYG{n}{i}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{r}\PYG{o}{*}\PYG{n}{r}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{o}{*}\PYG{n}{i}\PYG{p}{,}\PYG{n}{r}\PYG{o}{*}\PYG{n}{i}\PYG{o}{+}\PYG{n}{r}\PYG{o}{*}\PYG{n}{i}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{abs}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:cmplx}\PYG{p}{,}\PYG{n}{r}\PYG{p}{,}\PYG{n}{i}\PYG{p}{\PYGZcb{})}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{l+s+ss}{:math}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{((}\PYG{n}{r}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{o}{+}\PYG{n}{i}\PYG{o}{**}\PYG{l+m+mi}{2}\PYG{p}{))}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

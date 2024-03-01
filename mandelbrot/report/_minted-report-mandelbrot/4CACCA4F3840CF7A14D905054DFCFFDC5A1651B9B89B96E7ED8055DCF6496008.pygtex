@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{rows}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,[}\PYG{n}{hlist}\PYG{o}{|}\PYG{n}{tlist}\PYG{p}{],}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{,}\PYG{n}{wait\PYGZus{}num}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:mand\PYGZus{}done}\PYG{p}{,}\PYG{o}{\PYGZca{}}\PYG{n}{wait\PYGZus{}num}\PYG{p}{,}\PYG{n}{res}\PYG{p}{,}\PYG{n}{proc}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}
+\PYG{+w}{      }\PYG{p}{\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,[}\PYG{n}{hlist}\PYG{o}{|}\PYG{n}{tlist}\PYG{p}{]\PYGZcb{}}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{x}\PYG{o}{==}\PYG{+w}{ }\PYG{n}{width}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{        }\PYG{n+no}{true}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{y}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,[[]}\PYG{o}{|}\PYG{p}{[}\PYG{n}{hlist}\PYG{o}{|}\PYG{n}{tlist}\PYG{p}{]]\PYGZcb{}}
+\PYG{+w}{        }\PYG{n+no}{false}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,[}\PYG{n}{hlist}\PYG{o}{|}\PYG{n}{tlist}\PYG{p}{]\PYGZcb{}}
+\PYG{+w}{      }\PYG{k}{end}
+\PYG{+w}{      }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{y}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{height}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{        }\PYG{n+no}{true}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{tlist}
+\PYG{+w}{        }\PYG{n+no}{false}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{send}\PYG{p}{(}\PYG{n}{proc}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:new\PYGZus{}calc}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{\PYGZcb{});}\PYG{+w}{ }\PYG{n}{rows}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,[}\PYG{n}{hlist}\PYG{o}{++}\PYG{p}{[}\PYG{n}{res}\PYG{p}{]}\PYG{o}{|}\PYG{n}{tlist}\PYG{p}{],}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{wait\PYGZus{}num}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{+w}{      }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}

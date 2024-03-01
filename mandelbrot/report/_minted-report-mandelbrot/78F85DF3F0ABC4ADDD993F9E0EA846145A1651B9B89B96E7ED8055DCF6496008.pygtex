@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{process\PYGZus{}creator}\PYG{p}{(}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{n}{processes}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{n}{processes}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{process\PYGZus{}creator}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{,}\PYG{n}{num}\PYG{p}{,}\PYG{n}{processes}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{        }\PYG{n}{process\PYGZus{}creator}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{num}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,[}\PYG{n}{spawn}\PYG{p}{(}\PYG{k}{fn}\PYG{+w}{ }\PYG{p}{()}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{mandel\PYGZus{}calc}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}\PYG{o}{|}\PYG{n}{processes}\PYG{p}{])}
+\PYG{+w}{  }\PYG{k}{end}
+\end{Verbatim}

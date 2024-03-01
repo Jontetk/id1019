@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{defmodule}\PYG{+w}{ }\PYG{n+nc}{Color}\PYG{+w}{ }\PYG{k}{do}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{convert}\PYG{p}{(}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{max}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n}{convert\PYGZus{}suggested}\PYG{p}{(}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{max}\PYG{p}{)}
+\PYG{k}{end}
+
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{convert\PYGZus{}suggested}\PYG{p}{(}\PYG{n}{d}\PYG{p}{,}\PYG{n}{m}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n}{a}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{d}\PYG{o}{/}\PYG{n}{m}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{4}
+\PYG{+w}{    }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{trunc}\PYG{p}{(}\PYG{n}{a}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{y}\PYG{o}{=}\PYG{n}{trunc}\PYG{p}{(}\PYG{l+m+mi}{255}\PYG{o}{*}\PYG{p}{(}\PYG{n}{a}\PYG{o}{\PYGZhy{}}\PYG{n}{x}\PYG{p}{))}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{      }\PYG{l+m+mi}{0}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:rgb}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{l+m+mi}{1}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:rgb}\PYG{p}{,}\PYG{l+m+mi}{255}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{l+m+mi}{2}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:rgb}\PYG{p}{,}\PYG{l+m+mi}{255}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{255}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{l+m+mi}{3}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:rgb}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{255}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{      }\PYG{l+m+mi}{4}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:rgb}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{255}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{y}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{255}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{convert\PYGZus{}gray}\PYG{p}{(}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{max}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n}{gray}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{trunc}\PYG{p}{((}\PYG{n}{depth}\PYG{o}{/}\PYG{n}{max}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{255}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:rgb}\PYG{p}{,}\PYG{n}{gray}\PYG{p}{,}\PYG{n}{gray}\PYG{p}{,}\PYG{n}{gray}\PYG{p}{\PYGZcb{}}
+\PYG{+w}{  }\PYG{k}{end}
+
+
+
+\PYG{k}{end}
+\end{Verbatim}

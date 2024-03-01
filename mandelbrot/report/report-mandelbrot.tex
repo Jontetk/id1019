@@ -1,0 +1,194 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\graphicspath{{./bild/}}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Mandelbrot}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+The task was to visualize the mandelbrot set calculated from $z_{n+1} = z_n^2+c$ where $z_0=0$ This was then calculated to get a value for each pixel.
+
+
+\section*{Implementation}
+The first module required to implement the mandelbrot was the Cmplx module made for handling complex numbers. 
+It has four functions, new, add, sqr and abs, these are all very self explanatory and work with complex numbers on the form 
+{:cmplx,r,i}.
+\begin{minted}{elixir}
+defmodule Cmplx do
+  def new(r,i) do
+    {:cmplx,r,i}
+  end
+  def add({:cmplx,ar,ai},{:cmplx,br,bi}) do
+    {:cmplx,ar+br,ai+bi}
+  end
+  def sqr({:cmplx,r,i}) do
+    {:cmplx,r*r-i*i,r*i+r*i}
+  end
+  def abs({:cmplx,r,i}) do
+    :math.sqrt((r**2+i**2))
+  end
+end  
+\end{minted}
+The next implemented module was the Brot module. it actually calculated the result for a specified complex number and maximum iterations of the function. 
+The Brot module first created a new complex number for 0,0 which is $z_0$. Then it called a test function with the number of iterations set as 0. 
+The test function then checked if the abs of the current z is more than 2, if it is the iterations are returned as there is no way to get any further. If it was not the test function called itself with the z set as $z_{n+1}$ according to the function mentioned in the Introduction.
+Finally if the amount of iterations are equal to the max number of iterations 0 is returned. 
+\begin{minted}{elixir}
+defmodule Brot do
+  def mandelbrot(c, m) do
+    z0 = Cmplx.new(0,0)
+    i = 0
+    test(i, z0, c, m)
+    end
+  def test(m,_,_,m) do
+    0
+  end
+  def test(i,z,c,m) do
+    case Cmplx.abs(z) do
+      x when x>2 -> i
+      _ -> test(i+1,Cmplx.add(Cmplx.sqr(z),c),c,m)
+    end
+  end 
+end
+\end{minted}
+ The next module was the Color module with a convert function. this function then called a specific converting function. The converts took a depth and a max depth and then returned an rgb value. The two convert values that were created was the one that was suggested in the assignment, as well as a function which turns the depth value into a value between 0 and 255 by truncating the result of dividing the depth by the max and then multiplying with 255. Then this value is put into all three rgb channels which creates a gray image.
+ \begin{minted}{elixir}
+defmodule Color do
+def convert(depth,max) do
+    convert_suggested(depth,max)
+end
+
+  def convert_suggested(d,m) do
+    a = (d/m)*4
+    x = trunc(a)
+    y=trunc(255*(a-x))
+    case x do
+      0 -> {:rgb,y, 0, 0}
+      1 -> {:rgb,255, y, 0}
+      2 -> {:rgb,255 - y, 255, 0}
+      3 -> {:rgb,0, 255, y}
+      4 -> {:rgb,0, 255 - y, 255}
+    end
+  end
+  def convert_gray(depth,max) do
+    gray = trunc((depth/max)*255)
+    {:rgb,gray,gray,gray}
+  end
+
+
+
+end
+\end{minted}
+The final module it the Mandel module. The first function is the mandelbrot which creates the trans function used for converting an x,y value into a complex number. The rows function then is used to put these values into a list, this is done by calling the rows function with a list containing the first value, the x value 1 and y value 0. The rows function then checks if the current width is x if it is it calls the rows function again with a new list added to the previous list, with x as 0 and y as y+1. 
+Then if the x had not reached the width it is checked that the y is not equal to the height if it is the lists are returned, the current head is not returned as that will be empty as the last call would have created an empty list when x reached the width and then increased y which made y hit the max height. Finally if y is not equal to the height rows is called again with the color of the current pixel with a value of the result of Brot with the complex number being given by converting the current x and y using the trans function being added to the list and x increased.
+\begin{minted}{elixir}
+defmodule Mandel do
+  def mandelbrot(width, height, x, y, k, depth) do
+    trans = fn(w, h) ->
+      Cmplx.new(x + k * (w - 1), y - k * (h - 1))
+    end
+    rows(width, height, trans, depth, [[Color.convert(Brot.mandelbrot(trans.(0,0),depth),depth)]],1,0)
+  end
+
+
+  def rows(width,height,trans,depth,[hlist|tlist],x,y) do
+    case x == width do
+      true ->rows(width,height,trans,depth,[[]|[hlist|tlist]],0,y+1)
+      false-> case y == height do
+         true->tlist
+          false-> rows(width,height,trans,depth,[hlist++[Color.convert(Brot.mandelbrot(trans.(x,y),depth),depth)]|tlist],x+1,y)
+      end
+    end
+  end
+end
+\end{minted} 
+A second version of the Mandel module was created, which is parallelized. This is done by creating three new functions. The first is the mandel\_calc which actually does the calculation. It starts by doing the same calculation as was done in the rows, it then sends to the ctrl that it is finished and finally waits for a new instruction, this could either be to do a new calculation or to quit, if it is supposed to do a new calculation, it gets 
+a new x and y value as well as a new number for which process it is and then it calls itself with these values. 
+\begin{minted}{elixir}
+def mandel_calc(width,height,trans,depth,ctrl,x,y,proc_num) do
+  res = Color.convert(Brot.mandelbrot(trans.(x,y),depth),depth)
+  self = self()
+  send(ctrl,{:mand_done,proc_num,res,self})
+  receive do
+    {:new_calc,new_x,new_y,new_proc_num} -> mandel_calc(width,height,trans,depth,ctrl,new_x,new_y,new_proc_num)
+    {:quit} -> :ok
+  end
+end
+\end{minted}
+The next function is the process\_creator which simply spawn mandel\_calc processes, each process also gets a specified x,y and proc\_num starting from 0 where the amount of processes depend on the num variable, these processes are added to a list, when the num reaches 0 the processes as well as the proc\_num is returned. 
+\begin{minted}{elixir}
+  def process_creator(_,_,_,_,_,_,_,proc_num,0,processes) do
+    {processes,proc_num}
+  end
+  def process_creator(width,height,trans,depth,ctrl,x,y,proc_num,num,processes) do
+        process_creator(width,height,trans,depth,ctrl,x+1,y,proc_num+1,num-1,[spawn(fn () -> mandel_calc(width,height,trans,depth,ctrl,x,y,proc_num) end)|processes])
+  end  
+\end{minted}
+The final new function was the row\_handler which first creates the processes, then calls the rows to put together the final list using the processes and finally all processes are told to quit and the list is returned. 
+\begin{minted}{elixir}
+def row_handler(width,height,trans,depth,list) do
+  ctrl = self()
+  {processes,proc_num}=process_creator(width,height,trans,depth,ctrl,0,0,0,24,[])
+  list = rows(width,height,trans,depth,list,0,0,proc_num,0)
+  Enum.map(processes,fn process -> send(process,:quit)  end)
+  list
+end
+\end{minted}
+The rows and mandelbrot functions were also changed. The rows function now starts with waiting for a message from the processes where it only accepts the message from the current wait\_num, which is the proc\_num of the process that has the next pixel. It then does the same checks as the last version to see in which list it should place the result. Finally it either returns the tlist or sends a new x, y and proc\_num to the process that was done, then it calls itself with a higher x, proc\_num and wait\_num. it also adds the result to the list. 
+A second version was done where the list was empty, however it is written the same way except that the [hlist|tlist] is replaced with an empty list. 
+\begin{minted}{elixir}
+def rows(width,height,trans,depth,[hlist|tlist],x,y,proc_num,wait_num) do
+  receive do
+    {:mand_done,^wait_num,res,proc} ->
+      {x,y,[hlist|tlist]} = case x== width do
+        true -> {0,y+1,[[]|[hlist|tlist]]}
+        false -> {x,y,[hlist|tlist]}
+      end
+      case y == height do
+        true -> tlist
+        false -> send(proc,{:new_calc,x,y,proc_num}); rows(width,height,trans,depth,[hlist++[res]|tlist],x+1,y,proc_num+1,wait_num+1)
+      end
+  end
+end
+\end{minted}
+Finally the mandelbrot was changed so it calls row\_handler instead of rows. 
+\begin{minted}{elixir}
+def mandelbrot(width, height, x, y, k, depth) do
+  trans = fn(w, h) ->
+    Cmplx.new(x + k * (w - 1), y - k * (h - 1))
+  end
+  row_handler(width, height, trans, depth,[])
+end
+\end{minted}
+\subsection*{Result}
+The time it took to generate the images were measured for both the normal and parallelized versions. The size of the image was set at 1000 by 1000 and the depth was 500, the amount of processes was set at 24. 
+The result time for the normal version was around 6 seconds while the parallelized took around 2.8 seconds which means an improvement of more than half the time. 
+The images from running the function with 1000 height and width and 500 depth, first using the gray color function and then the suggested:
+\FloatBarrier{\noindent}\begin{center}
+  
+
+\includegraphics[scale=0.25]{gray}
+\end{center}
+\begin{center}
+  
+\includegraphics[scale=0.25]{sugg.png}
+\end{center}
+\FloatBarrier{\noindent}
+\end{document}

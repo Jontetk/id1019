@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{mandel\PYGZus{}calc}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{res}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{Color}\PYG{o}{.}\PYG{n}{convert}\PYG{p}{(}\PYG{n+nc}{Brot}\PYG{o}{.}\PYG{n}{mandelbrot}\PYG{p}{(}\PYG{n}{trans}\PYG{o}{.}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{),}\PYG{n}{depth}\PYG{p}{),}\PYG{n}{depth}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n}{self}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{self}\PYG{p}{()}
+\PYG{+w}{  }\PYG{n}{send}\PYG{p}{(}\PYG{n}{ctrl}\PYG{p}{,\PYGZob{}}\PYG{l+s+ss}{:mand\PYGZus{}done}\PYG{p}{,}\PYG{n}{proc\PYGZus{}num}\PYG{p}{,}\PYG{n}{res}\PYG{p}{,}\PYG{n}{self}\PYG{p}{\PYGZcb{})}
+\PYG{+w}{  }\PYG{k}{receive}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:new\PYGZus{}calc}\PYG{p}{,}\PYG{n}{new\PYGZus{}x}\PYG{p}{,}\PYG{n}{new\PYGZus{}y}\PYG{p}{,}\PYG{n}{new\PYGZus{}proc\PYGZus{}num}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{mandel\PYGZus{}calc}\PYG{p}{(}\PYG{n}{width}\PYG{p}{,}\PYG{n}{height}\PYG{p}{,}\PYG{n}{trans}\PYG{p}{,}\PYG{n}{depth}\PYG{p}{,}\PYG{n}{ctrl}\PYG{p}{,}\PYG{n}{new\PYGZus{}x}\PYG{p}{,}\PYG{n}{new\PYGZus{}y}\PYG{p}{,}\PYG{n}{new\PYGZus{}proc\PYGZus{}num}\PYG{p}{)}
+\PYG{+w}{    }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:quit}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{l+s+ss}{:ok}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+\end{Verbatim}
