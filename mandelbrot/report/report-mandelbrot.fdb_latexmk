@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1709314100 "f:/SKOLADOKUMENT/id1019/mandelbrot/report/report-mandelbrot.tex" "report-mandelbrot.pdf" "report-mandelbrot" 1709314101 0
+["pdflatex"] 1709314411 "f:/SKOLADOKUMENT/id1019/mandelbrot/report/report-mandelbrot.tex" "report-mandelbrot.pdf" "report-mandelbrot" 1709314412 0
   "_minted-report-mandelbrot/0A2F7D6197779759C5DB0CDAAA5570855A1651B9B89B96E7ED8055DCF6496008.pygtex" 1709309776 2761 1a587d923c8f6d0f1882534e4bc18642 ""
   "_minted-report-mandelbrot/18F56C1A702B6A0F0301D783495C98AA5A1651B9B89B96E7ED8055DCF6496008.pygtex" 1709307973 1632 362debffae922cc10e3efe8913319174 ""
   "_minted-report-mandelbrot/4CACCA4F3840CF7A14D905054DFCFFDC5A1651B9B89B96E7ED8055DCF6496008.pygtex" 1709313279 2353 8619edcf21d53d418414cb572383fd61 ""
@@ -187,9 +187,9 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1693259328 4703417 774bacf0b829d2915046f57da58dbddc ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1693259685 8172988 01ef39466c61823c9869c246c4e8e439 ""
   "c:/texlive/2023/texmf.cnf" 1693259237 713 e69b156964470283e0530f5060668171 ""
-  "f:/SKOLADOKUMENT/id1019/mandelbrot/report/report-mandelbrot.tex" 1709314100 9497 0078dae19d6e1a136d1dee9ec2c38ce1 ""
-  "report-mandelbrot.aux" 1709314101 755 98fd548c79686dd5d4952a944b86a3a6 "pdflatex"
-  "report-mandelbrot.tex" 1709314100 9497 0078dae19d6e1a136d1dee9ec2c38ce1 ""
+  "f:/SKOLADOKUMENT/id1019/mandelbrot/report/report-mandelbrot.tex" 1709314411 9543 c0d78bb03af3e2d3ba818c200554a33b ""
+  "report-mandelbrot.aux" 1709314412 755 98fd548c79686dd5d4952a944b86a3a6 "pdflatex"
+  "report-mandelbrot.tex" 1709314411 9543 c0d78bb03af3e2d3ba818c200554a33b ""
   (generated)
   "report-mandelbrot.aux"
   "report-mandelbrot.log"
