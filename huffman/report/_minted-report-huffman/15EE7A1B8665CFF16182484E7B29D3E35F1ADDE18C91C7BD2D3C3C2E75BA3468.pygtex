@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{insert\PYGZus{}into}\PYG{p}{(\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{n}{c3}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f3}\PYG{p}{\PYGZcb{}\PYGZcb{}}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{rest}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{new\PYGZus{}list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{k}{case}\PYG{+w}{ }\PYG{n}{f}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{f3}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n+no}{true}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{new\PYGZus{}list}\PYG{+w}{ }\PYG{o}{++}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{c3}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f3}\PYG{p}{\PYGZcb{}\PYGZcb{}}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{rest}\PYG{p}{]}
+\PYG{+w}{    }\PYG{n+no}{false}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{insert\PYGZus{}into}\PYG{p}{(\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{n}{rest}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{new\PYGZus{}list}\PYG{+w}{ }\PYG{o}{++}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{n}{c3}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f3}\PYG{p}{\PYGZcb{}\PYGZcb{}])}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{k}{end}
+
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{insert\PYGZus{}into}\PYG{p}{(\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{p}{[],}\PYG{+w}{ }\PYG{n}{new\PYGZus{}list}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{new\PYGZus{}list}\PYG{+w}{ }\PYG{o}{++}\PYG{+w}{ }\PYG{p}{[\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}\PYGZcb{}]}
+\PYG{k}{end}
+\end{Verbatim}

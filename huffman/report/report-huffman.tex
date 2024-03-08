@@ -1,0 +1,122 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\graphicspath{{./bild/}}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Huffman}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+
+\section*{Introduction}
+This assignment was to do huffman coding to decrease the size of text by making the most used characters the smallest.
+
+\section*{Implementation}
+The task was split into multiple functions, the first would create a tree from the text, the second was to create a table contating the encoding for each charater. The third would actually encode the string of characters, and the final function is used to decode the characters.
+The tree function was implemented by implementing a freq function. This would take in a sample, then call itself with the sample and a new Map. The next version then takes the current char from sample checks if it can be taken from the map, if it can its frequency value is added by one if it can not the frequency value is set as 1. When the list is empty the frequency map is returned. 
+\begin{minted}{elixir}
+def freq([char | rest], frequ) do
+  frequ =
+    case Map.get(frequ, char) do
+      nil -> Map.put(frequ, char, 1)
+      value -> Map.put(frequ, char, value + 1)
+    end
+
+  freq(rest, frequ)
+end
+\end{minted}
+The map that is returned is then turned into a list and sorted, finally the frequency part of the tuple is turned into a new tuple with the atom :f and the frequency, this was done so it would be easier to identify the frequency from characters when debugging at the later stages of implementation. 
+Then the huffman function is called. 
+\begin{minted}{elixir}
+def tree(sample) do
+  frequ =
+    Enum.sort(Map.to_list(freq(sample)), fn {_, v1}, {_, v2} -> v2 > v1 end)
+    |> Enum.map(fn {c, f} -> {c, {:f, f}} end)
+
+  huffman(frequ)
+end 
+\end{minted}
+The huffman simply calls the huffman\_tree. The huffman\_tree takes in a list of tuples containing characters and frequencies. It then combines the characters into the same tuple and adds the frequencies together. The huffman\_tree function is then called again using the result of putting the combined character and frequencies, together with the remaining list and an empty list into the insert\_into function. The character can also be a tuple of multiple characters, therefore creating a tree. 
+When only one character is remaining in the list, The character is returned, this could also be a tree. If no characters were in the list an empty list is returned. 
+\begin{minted}{elixir}
+def huffman_tree([{c1, {:f, f1}}, {c2, {:f, f2}} | rest]) do
+  huffman_tree(insert_into({{c1, c2}, {:f, f1 + f2}}, rest, []))
+end  
+\end{minted}
+The insert\_into function simply checks if the character it was given is smaller than the current character in the list, if it is, it is added to a new list, before the current character of the list and the rest, if it was not the current character is added to the new list and the function is called with the rest of the current list, finally if the current list is empty the character is simply added to the end of the new list. 
+This is to insert a character into an already sorted list without having to sort it again. 
+\begin{minted}{elixir}
+def insert_into({c, {:f, f}}, [{c3, {:f, f3}} | rest], new_list) do
+  case f < f3 do
+    true -> new_list ++ [{c, {:f, f}}, {c3, {:f, f3}} | rest]
+    false -> insert_into({c, {:f, f}}, rest, new_list ++ [{c3, {:f, f3}}])
+  end
+end
+
+def insert_into({c, {:f, f}}, [], new_list) do
+  new_list ++ [{c, {:f, f}}]
+end
+\end{minted}
+The next large function is the encode\_table, this function calls collect\_chars with the inputted tree and two empty lists. 
+The collect\_chars function simply calls collect\_chars on both the left and right branch, and adds either 0 or 1 to the path list it calls the function with. The result is then saved as the charlist. If the current part of the tree was a char instead of a tuple, the function checks if the path was empty, if it was the char aswell as a list containing a 1 is returned, this is for the case when only one character was in the tree. If the path was not empty the char and the path is added to the charlist. 
+\begin{minted}{elixir}
+def collect_chars(char, charlist, path) do
+  case path do
+  [] -> [{char,[1]}]
+  _ ->[{char, path} | charlist]
+  end
+end
+\end{minted}
+The encode function works by first turning the table it was given into a Map, using Map.new. Then encode\_char is called using the text, table and an empty list as arguments. 
+encode\_char then first tries to get the current char from the table if it can not, it prints an error and calls itself with the next character. If it could, it calls itself with the rest and the current character encoding reversed added to the encoded. Finally when the list is empty the encoded list is flattened and reversed. The reason for having to reverse it is so the values are in the correct order. Reversing the current character and then the encoded list at the end is a lot faster than simply appending to the encoded list, as 
+appending took too long to finish when done to a large text. 
+\begin{minted}{elixir}
+def encode(text, table) do
+  table = Map.new(table)
+  encode_char(text, table, [])
+end
+def encode_char([char | rest], table, encoded) do
+  case Map.get(table, char) do
+    nil -> IO.puts("Char not found in table #{char}"); encode_char(rest, table, encoded)
+    char_encode -> encode_char(rest, table, [Enum.reverse(char_encode)|encoded])
+  end
+end
+
+def encode_char([], _, encoded) do
+  Enum.reverse(List.flatten(encoded))
+
+end
+\end{minted}
+The final function, the decode works by first taking a sequence and the table, it then calls decode\_char, which will return a char and a rest. The char is then added to a list where the tail is the decode function with the rest. When called with an empty list it will return an empty list. 
+The decode char gets the code and the rest from splitting the sequence at n, then looking for the code in the table, using List.keyfind, if it is found the char is returned together with the rest, if it is not found the decode\_char is called again with n increased by 1.
+\begin{minted}{elixir}
+def decode(seq, table) do
+  {char, rest} = decode_char(seq, 1, table)
+  [char | decode(rest, table)]
+end
+def decode_char(seq, n, table) do
+  {code, rest} = Enum.split(seq, n)
+  case List.keyfind(table, code, 1) do
+    :nil ->
+      decode_char(seq, n+1, table)
+    {char,_} ->
+      {char,rest}
+  end
+end
+\end{minted}
+
+\end{document}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{tree}\PYG{p}{(}\PYG{n}{sample}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{frequ}\PYG{+w}{ }\PYG{o}{=}
+\PYG{+w}{    }\PYG{n+nc}{Enum}\PYG{o}{.}\PYG{n}{sort}\PYG{p}{(}\PYG{n+nc}{Map}\PYG{o}{.}\PYG{n}{to\PYGZus{}list}\PYG{p}{(}\PYG{n}{freq}\PYG{p}{(}\PYG{n}{sample}\PYG{p}{)),}\PYG{+w}{ }\PYG{k}{fn}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{v1}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{v2}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{v2}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{v1}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}
+\PYG{+w}{    }\PYG{o}{|\PYGZgt{}}\PYG{+w}{ }\PYG{n+nc}{Enum}\PYG{o}{.}\PYG{n}{map}\PYG{p}{(}\PYG{k}{fn}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{c}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f}\PYG{p}{\PYGZcb{}\PYGZcb{}}\PYG{+w}{ }\PYG{k}{end}\PYG{p}{)}
+
+\PYG{+w}{  }\PYG{n}{huffman}\PYG{p}{(}\PYG{n}{frequ}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}

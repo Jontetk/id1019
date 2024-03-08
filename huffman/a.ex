@@ -1,24 +1,39 @@
 defmodule Huffman do
   def sample do
     ~c"the quick brown fox jumps over the lazy dog
-  this is a sample text that we will use when we build
-  up a table we will only handle lower case letters and
-  no punctuation symbols the frequency will of course not
-  represent english but it is probably not that far off"
+    this is a sample text that we will use when we build
+    up a table we will only handle lower case letters and
+    no punctuation symbols the frequency will of course not
+    represent english but it is probably not that far off"
   end
 
   def text() do
     ~c"this is something that we should encode"
   end
 
+  def read(file) do
+    text = File.read!(file)
+    chars = String.to_charlist(text)
+    {:ok, chars, String.length(text), Kernel.byte_size(text)}
+    end
+
+
   def test do
-    sample = sample()
-    tree = tree(sample)
-    encode = encode_table(tree)
-    decode = decode_table(tree)
-    text = text()
-    seq = encode(text, encode)
-    decode(seq, encode)
+    {:ok,sample2,strlen,bytesiz} = read("kallocain.txt")
+    sample = sample2
+    {tree_time,tree} = :timer.tc(fn ->tree(sample) end)
+    {enc_time,encode} = :timer.tc(fn ->encode_table(tree) end)
+    #decode = decode_table(tree)
+    text = sample2
+    {seq_time,seq} = :timer.tc(fn ->encode(text, encode) end)
+    {dec_time,dec} = :timer.tc(fn ->decode(seq, encode) end)
+    IO.inspect({strlen,bytesiz})
+    IO.inspect({length(seq),length(encode)})
+    IO.inspect("#{dec}")
+    IO.inspect(sample2)
+    IO.inspect({tree_time,enc_time,seq_time,dec_time})
+    :ok
+
   end
 
   def tree(sample) do
@@ -56,8 +71,11 @@ defmodule Huffman do
   end
 
   def huffman_tree([{c1, {:f, f2}} | rest]) do
-    {chars, {:f, _}} = hd([{c1, {:f, f2}} | rest])
-    chars
+
+    c1
+  end
+  def huffman_tree([]) do
+    []
   end
 
   def insert_into({c, {:f, f}}, [{c3, {:f, f3}} | rest], new_list) do
@@ -82,12 +100,15 @@ defmodule Huffman do
   end
 
   def collect_chars(char, charlist, path) do
-    [{char, path} | charlist]
+    case path do
+    [] -> [{char,[1]}]
+    _ ->[{char, path} | charlist]
+    end
   end
 
-  def decode_table(tree) do
-    # To implement...
-  end
+  #def decode_table(tree) do
+  #  # To implement...
+  #end
 
   def encode(text, table) do
     table = Map.new(table)
@@ -96,13 +117,14 @@ defmodule Huffman do
 
   def encode_char([char | rest], table, encoded) do
     case Map.get(table, char) do
-      nil -> IO.puts("Char not found in table#{char}")
-      char_encode -> encode_char(rest, table, encoded ++ char_encode)
+      nil -> IO.puts("Char not found in table #{char}"); encode_char(rest, table, encoded)
+      char_encode -> encode_char(rest, table, [Enum.reverse(char_encode)|encoded])
     end
   end
 
-  def encode_char([], table, encoded) do
-    encoded
+  def encode_char([], _, encoded) do
+    Enum.reverse(List.flatten(encoded))
+
   end
 
   def decode([], _) do
@@ -123,9 +145,6 @@ defmodule Huffman do
         decode_char(seq, n+1, table)
 
       {char,_} ->
-        IO.inspect("chaer")
-        IO.inspect(char)
-        IO.inspect(rest)
         {char,rest}
 
     end

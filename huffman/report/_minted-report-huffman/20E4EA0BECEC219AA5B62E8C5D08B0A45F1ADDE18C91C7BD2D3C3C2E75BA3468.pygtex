@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{huffman\PYGZus{}tree}\PYG{p}{([\PYGZob{}}\PYG{n}{c1}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f1}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{c2}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f2}\PYG{p}{\PYGZcb{}\PYGZcb{}}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{rest}\PYG{p}{])}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{huffman\PYGZus{}tree}\PYG{p}{(}\PYG{n}{insert\PYGZus{}into}\PYG{p}{(\PYGZob{}\PYGZob{}}\PYG{n}{c1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{c2}\PYG{p}{\PYGZcb{},}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{l+s+ss}{:f}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{f1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{f2}\PYG{p}{\PYGZcb{}\PYGZcb{},}\PYG{+w}{ }\PYG{n}{rest}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{[]))}
+\PYG{k}{end}
+\end{Verbatim}
