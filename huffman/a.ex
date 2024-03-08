@@ -27,13 +27,13 @@ defmodule Huffman do
     text = sample2
     {seq_time,seq} = :timer.tc(fn ->encode(text, encode) end)
     {dec_time,dec} = :timer.tc(fn ->decode(seq, encode) end)
+    {dec_alt_time,dec_alt} = :timer.tc(fn ->decode_alt(seq, tree) end)
     IO.inspect({strlen,bytesiz})
-    IO.inspect({length(seq),length(encode)})
-    IO.inspect("#{dec}")
+    IO.inspect({length(seq),length(encode),:erlang.external_size(seq)})
+    IO.inspect("#{dec_alt}")
     IO.inspect(sample2)
-    IO.inspect({tree_time,enc_time,seq_time,dec_time})
+    IO.inspect({tree_time,enc_time,seq_time,dec_time,dec_alt_time})
     :ok
-
   end
 
   def tree(sample) do
@@ -148,5 +148,20 @@ defmodule Huffman do
         {char,rest}
 
     end
+  end
+  def decode_alt(seq,tree) do
+    decode_alt(seq,tree,tree,[])
+  end
+  def decode_alt([path|rest],current,tree,charlist) do
+    case current do
+    {left,right} -> case path do
+      0 -> decode_alt(rest,left,tree,charlist)
+      1-> decode_alt(rest,right,tree,charlist)
+    end
+    _ -> decode_alt([path|rest],tree,tree,[current|charlist])
+    end
+  end
+  def decode_alt([],current,_,charlist) do
+    Enum.reverse([current|charlist])
   end
 end

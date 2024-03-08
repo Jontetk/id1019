@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  8 MAR 2024 18:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.28)  8 MAR 2024 19:29
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -517,7 +517,10 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
  (./_minted-report-huffman/9E86C9ADC4BD243615F6066A7D2D2E405F1ADDE18C91C7BD2D3C3C2E75BA3468.pygtex)
 \openout3 = `report-huffman.pyg'.
 
- (./_minted-report-huffman/615E946B8CDD8BEB5B7EF32B5FFDFEBE5F1ADDE18C91C7BD2D3C3C2E75BA3468.pygtex [3]) [4] (./report-huffman.aux)
+ (./_minted-report-huffman/615E946B8CDD8BEB5B7EF32B5FFDFEBE5F1ADDE18C91C7BD2D3C3C2E75BA3468.pygtex [3])
+\openout3 = `report-huffman.pyg'.
+
+ (./_minted-report-huffman/7980771AB072562A5AAC460BA9C8831E5F1ADDE18C91C7BD2D3C3C2E75BA3468.pygtex [4]) [5] (./report-huffman.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-11>
@@ -526,18 +529,18 @@ runsystem(del report-huffman.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 27228 strings out of 475188
- 697061 string characters out of 5767814
+ 27236 strings out of 475188
+ 697722 string characters out of 5767814
  1926248 words of memory out of 5000000
- 48079 multiletter control sequences out of 15000+600000
- 562484 words of font info for 51 fonts, out of 8000000 for 9000
+ 48084 multiletter control sequences out of 15000+600000
+ 562791 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,6n,103p,773b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,6n,103p,1169b,609s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on report-huffman.pdf (4 pages, 66450 bytes).
+Output written on report-huffman.pdf (5 pages, 70996 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 43 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

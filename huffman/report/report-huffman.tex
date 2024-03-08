@@ -118,5 +118,26 @@ def decode_char(seq, n, table) do
   end
 end
 \end{minted}
+\subsection*{Benchmark and Discussion}
+Using huffman coding does definitely bring the size of storing the text down, as the size of a large text such as kallocain according to the Kernel.byte\_size is 333816 while the length of the list divided by eight to get them into bytes is 178600, around half of that of the original string, however due to uncertainties on how much actual size is used to represent the list, the actual size of the list containing the 1 and 0 for the encoded string could be larger. 
+When benchmarking the times for doing the huffman coding using the kallocain as both sample and text, creating the encode table was the fastest, only taking around 100 microseconds. The tree was next taking around 20000, the next was the encode function which as previously mentioned had to be changed to improve speed, removing the need to use append each time the list is changed, instead reversing the list when complete. This function usually took around 60000-70000 microseconds. The slowest function was the decode as it has to the list and check if the current code is the correct one or if the list should be split again. This takes around 750000 microseconds. This function could definitely be improved, an improvement was made where the decode would instead go through the tree following the path and look for a character, when the character is found it is added to the list and the current path is reset to the top of the tree, finally when the sequence list is empty the last character is added and the list is reversed, reversing is once again used instead of appending due to time improvements. 
+\begin{minted}{elixir}
+def decode_alt(seq,tree) do
+  decode_alt(seq,tree,tree,[])
+end
+def decode_alt([path|rest],current,tree,charlist) do
+  case current do
+  {left,right} -> case path do
+    0 -> decode_alt(rest,left,tree,charlist)
+    1-> decode_alt(rest,right,tree,charlist)
+  end
+  _ -> decode_alt([path|rest],tree,tree,[current|charlist])
+  end
+end
+def decode_alt([],current,_,charlist) do
+  Enum.reverse([current|charlist])
+end
+\end{minted} 
+Using the alternative way the time for decoding is decreased to around 10000-20000 microseconds a large improvement from 750000 microseconds.
 
 \end{document}
