@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{decode}\PYG{p}{(}\PYG{n}{signal}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n}{tree}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{MorseCode}\PYG{o}{.}\PYG{n}{tree}\PYG{p}{()}
+\PYG{+w}{    }\PYG{n}{decode}\PYG{p}{(}\PYG{n}{signal}\PYG{p}{,}\PYG{n}{tree}\PYG{p}{,}\PYG{n}{tree}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{decode}\PYG{p}{([],}\PYG{n}{root}\PYG{p}{,}\PYG{n}{root}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{[]}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{decode}\PYG{p}{([],\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{char}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{short}\PYG{p}{\PYGZcb{},}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{[}\PYG{n}{char}\PYG{p}{]}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{decode}\PYG{p}{([}\PYG{l+s+sc}{?\PYGZhy{}}\PYG{o}{|}\PYG{n}{msg}\PYG{p}{],\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{char}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{short}\PYG{p}{\PYGZcb{},}\PYG{n}{root}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n}{decode}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{root}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{decode}\PYG{p}{([}\PYG{l+s+sc}{?.}\PYG{o}{|}\PYG{n}{msg}\PYG{p}{],\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{char}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{short}\PYG{p}{\PYGZcb{},}\PYG{n}{root}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{n}{decode}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{,}\PYG{n}{short}\PYG{p}{,}\PYG{n}{root}\PYG{p}{)}
+\PYG{+w}{  }\PYG{k}{end}
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{decode}\PYG{p}{([}\PYG{l+s+sc}{?}\PYG{l+s+se}{\PYGZbs{}s}\PYG{o}{|}\PYG{n}{msg}\PYG{p}{],\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{char}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{short}\PYG{p}{\PYGZcb{},}\PYG{n}{root}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{    }\PYG{p}{[}\PYG{n}{char}\PYG{o}{|}\PYG{n}{decode}\PYG{p}{(}\PYG{n}{msg}\PYG{p}{,}\PYG{n}{root}\PYG{p}{,}\PYG{n}{root}\PYG{p}{)]}
+\PYG{+w}{  }\PYG{k}{end}
+
+\end{Verbatim}

@@ -1,0 +1,91 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{minted}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{pgfplots}
+\graphicspath{{./bild/}}
+\pgfplotsset{compat=1.18} 
+
+\begin{document}
+
+\title{
+    \textbf{Sista}
+}
+\author{Jonathan Karlsson}
+\date{Spring Term 2024}
+
+\maketitle
+\subsection*{Introduction}
+This assignment was to create an encoder and decoder for morsecode
+
+\subsection*{Implementation}
+\subsubsection*{Encoding}
+The encoder was done by first creating a table which is a map which maps all chars to a sequence using the tree.
+On each node in the tree the current char is saved to the map as the sequence then the long and short path is encoded and also saved as table which is finally returned.
+\begin{minted}{elixir}
+  def encode_table(tree) do
+  encode_table(tree,[],%{})
+end
+def encode_table(:nil,_,table) do table end
+def encode_table({:node,:na,long,short},code,table) do
+  table = encode_table(long,[?-|code],table)
+  table = encode_table(short,[?.|code],table)
+end
+def encode_table({:node,char,long,short},code,table) do
+  table = Map.put(table,char,Enum.reverse(code))
+  table = encode_table(long,[?-|code],table)
+  table = encode_table(short,[?.|code],table)
+end  
+\end{minted}
+Then each required char was gotten from the map, a space is added and then the rest of the text is encoded.
+\begin{minted}{elixir}
+def encode(text) do
+  table = encode_table(MorseCode.tree())
+  encode(text,table)
+end
+def encode([],_) do []end
+def encode([char|rest],table) do
+  Map.get(table,char)++[?\s]++encode(rest,table)
+end
+\end{minted}
+\subsection*{Decoding}
+The decoding was done by going throgh the tree depending on if the current part is a . or -, then when a space is saved the current char is added to the rest of the characters, finally if the end is reached and there is still a char the char is the last character in the list. If the root is the current part of the tree an empty list is returned. 
+\begin{minted}{elixir}
+  def decode(signal) do
+    tree = MorseCode.tree()
+    decode(signal,tree,tree)
+  end
+  def decode([],root,root) do
+    []
+  end
+  def decode([],{:node,char,long,short},_) do
+    [char]
+  end
+  def decode([?-|msg],{:node,char,long,short},root) do
+    decode(msg,long,root)
+  end
+  def decode([?.|msg],{:node,char,long,short},root) do
+    decode(msg,short,root)
+  end
+  def decode([?\s|msg],{:node,char,long,short},root) do
+    [char|decode(msg,root,root)]
+  end
+
+\end{minted}
+\subsection*{Result}
+decoding the base example gave the result
+\begin{minted}{elixir}
+~c"all your base are belong to us"
+\end{minted}
+The result of the second example was:
+\FloatBarrier{\noindent}
+
+\makebox[\textwidth]{\includegraphics[scale=1]{image}}
+
+\end{document}

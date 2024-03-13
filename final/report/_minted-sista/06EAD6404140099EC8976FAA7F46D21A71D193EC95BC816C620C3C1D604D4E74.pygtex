@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{  }\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n}{tree}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n}{tree}\PYG{p}{,[],\PYGZpc{}\PYGZob{}\PYGZcb{})}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{l+s+ss}{:nil}\PYG{p}{,}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{,}\PYG{n}{table}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}\PYG{+w}{ }\PYG{n}{table}\PYG{+w}{ }\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{l+s+ss}{:na}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{short}\PYG{p}{\PYGZcb{},}\PYG{n}{code}\PYG{p}{,}\PYG{n}{table}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n}{long}\PYG{p}{,[}\PYG{l+s+sc}{?\PYGZhy{}}\PYG{o}{|}\PYG{n}{code}\PYG{p}{],}\PYG{n}{table}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n}{table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n}{short}\PYG{p}{,[}\PYG{l+s+sc}{?.}\PYG{o}{|}\PYG{n}{code}\PYG{p}{],}\PYG{n}{table}\PYG{p}{)}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(\PYGZob{}}\PYG{l+s+ss}{:node}\PYG{p}{,}\PYG{n}{char}\PYG{p}{,}\PYG{n}{long}\PYG{p}{,}\PYG{n}{short}\PYG{p}{\PYGZcb{},}\PYG{n}{code}\PYG{p}{,}\PYG{n}{table}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nc}{Map}\PYG{o}{.}\PYG{n}{put}\PYG{p}{(}\PYG{n}{table}\PYG{p}{,}\PYG{n}{char}\PYG{p}{,}\PYG{n+nc}{Enum}\PYG{o}{.}\PYG{n}{reverse}\PYG{p}{(}\PYG{n}{code}\PYG{p}{))}
+\PYG{+w}{  }\PYG{n}{table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n}{long}\PYG{p}{,[}\PYG{l+s+sc}{?\PYGZhy{}}\PYG{o}{|}\PYG{n}{code}\PYG{p}{],}\PYG{n}{table}\PYG{p}{)}
+\PYG{+w}{  }\PYG{n}{table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n}{short}\PYG{p}{,[}\PYG{l+s+sc}{?.}\PYG{o}{|}\PYG{n}{code}\PYG{p}{],}\PYG{n}{table}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}

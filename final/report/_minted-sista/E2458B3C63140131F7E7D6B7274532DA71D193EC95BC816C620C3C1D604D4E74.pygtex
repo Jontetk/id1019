@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode}\PYG{p}{(}\PYG{n}{text}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n}{table}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{encode\PYGZus{}table}\PYG{p}{(}\PYG{n+nc}{MorseCode}\PYG{o}{.}\PYG{n}{tree}\PYG{p}{())}
+\PYG{+w}{  }\PYG{n}{encode}\PYG{p}{(}\PYG{n}{text}\PYG{p}{,}\PYG{n}{table}\PYG{p}{)}
+\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode}\PYG{p}{([],}\PYG{n+nb+bp}{\PYGZus{}}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}\PYG{+w}{ }\PYG{p}{[]}\PYG{k}{end}
+\PYG{k+kd}{def}\PYG{+w}{ }\PYG{n}{encode}\PYG{p}{([}\PYG{n}{char}\PYG{o}{|}\PYG{n}{rest}\PYG{p}{],}\PYG{n}{table}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{do}
+\PYG{+w}{  }\PYG{n+nc}{Map}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{table}\PYG{p}{,}\PYG{n}{char}\PYG{p}{)}\PYG{o}{++}\PYG{p}{[}\PYG{l+s+sc}{?}\PYG{l+s+se}{\PYGZbs{}s}\PYG{p}{]}\PYG{o}{++}\PYG{n}{encode}\PYG{p}{(}\PYG{n}{rest}\PYG{p}{,}\PYG{n}{table}\PYG{p}{)}
+\PYG{k}{end}
+\end{Verbatim}
